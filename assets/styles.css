@@ -212,6 +212,6 @@ height: auto;
     padding-left: 500px;*/
 }
 
-.shadow{
-    background-color: red;
+#shadow{
+    background-color: grey;
 }

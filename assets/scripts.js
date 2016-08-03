@@ -52,14 +52,36 @@ $("#Selector").change(function(){
       '<input type="text" class="form-control" aria-label="...">'+
     '</div></div></div>'
                     +
-                '<input type = "checkbox"  name="chk_group">\n\
-                     <input type = "text" class="shadow" value="Click to add option">';
+                '<div class="row">'+
+                 '<div class="col-lg-6">'+
+    '<div class="input-group">'+
+      '<span class="input-group-addon">'+
+        '<input type="checkbox" aria-label="...">'+
+      '</span>'+
+      '<input type="text" class="form-control" id ="shadow" aria-label="...">'+
+    '</div></div></div>';
             break;
         case '3':
             html = '<select name="list" form="form">';
             break;
         case '4':
-            html = '<input type = "radio" name="rad_group">';
+           html = '<div class="row">'+
+                 '<div class="col-lg-6">'+
+    '<div class="input-group">'+
+      '<span class="input-group-addon">'+
+        '<input type="radio" aria-label="...">'+
+      '</span>'+
+      '<input type="text" class="form-control" aria-label="...">'+
+    '</div></div></div>'
+                    +
+                '<div class="row">'+
+                 '<div class="col-lg-6">'+
+    '<div class="input-group">'+
+      '<span class="input-group-addon">'+
+        '<input type="radio" aria-label="...">'+
+      '</span>'+
+      '<input type="text" class="form-control" id ="shadow" aria-label="...">'+
+    '</div></div></div>';
             break;
         
     }

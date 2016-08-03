@@ -139,9 +139,12 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
                                 <div class="form-group">
                                     <input type="text" name="Form description" value="Form description" class="form-control">
                                 </div>
-                                <input type="text" name="Question title" value="Question title"><br>
-                                <input type="text" name="Help text" value="Help text"><br>
-
+                                <div class="form-group">
+                                    <input type="text" name="Question title" value="Question title" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="Help text" value="Help text" class="form-control">
+                                </div>
                                 Question Type: 
                                 <select id="Selector" >
                                     <option value="1" >Text </option> 
