@@ -208,12 +208,10 @@ height: auto;
 /*    width: 1000px;
     padding: 200px;
     border: 25px solid navy;*/
-    margin-top:80px;
-   /* padding-left: 500px;*/
+    /*margin-top:80px;
+    padding-left: 500px;*/
 }
-input {
-    width: 80%;
-}
+
 .shadow{
     background-color: red;
 }
