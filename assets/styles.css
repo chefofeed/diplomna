@@ -223,3 +223,15 @@ height: auto;
     text-align: center;
    line-height: 80px;
 }
+.no-border {
+    border: 0;
+    box-shadow: none; /* You may want to include this as bootstrap applies these styles too */
+    border-bottom: 2px;
+}
+
+.question{
+    
+    border: 5px;
+    border-color: red;
+    padding-left: 20px;
+}

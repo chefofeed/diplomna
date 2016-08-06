@@ -132,41 +132,37 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
                             Page 1/1
                         </div>
                         <div class="panel-body">
-                            <form action="input" class="">
+                            <form>
                                 <div class="form-group">
-                                    <input type="text" name="Title" value="Title" class="form-control">
+                                    <input type="text" name="formtitle" placeholder="Form title" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="Form description" value="Form description" class="form-control">
+                                    <input type="text" name="formdescription" placeholder="Form Description" class="form-control"> 
                                 </div>
-                                <div class="form-group">
-                                    <input type="text" name="Question title" value="Question title" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" name="Help text" value="Help text" class="form-control">
-                                </div>
-                                <label>Question Type:</label>
-                                <select id="Selector">
-                                    <option value="1">Select </option> 
-                                    <option value="2">Text </option> 
-                                    <option value="3">Multiple choice </option>                    
-                                    <option value="4">Choose from a list </option>
-                                    <option value="5">Radio button </option>
-                                    <option value="6">Paragraph text</option> 
-                                </select>
-                                <div id="content" class="container-fluid">                                
+                                <div class="question">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <h2>Untitled Question</h2> 
+                                            <input type="hidden" name="htext">   
+                                            <div class="input-group option">
+                                                <span class="input-group-addon">
+                                                    <input type="radio" aria-label="...">
+                                                </span>
+                                                <input type="text" class="form-control" aria-label="..."class="form-control" value="Option 33">
+                                            </div><!-- /input-group -->
+                                        </div> 
+                                    </div>
                                 </div>   
-                                <button type="button" class="btn btn-primary">Done</button>
-                            </form>  
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-            <!--/.fluid-container-->
-            <script src="bootstrap/js/jquery-1.9.1.min.js"></script>
-            <script src="bootstrap/js/bootstrap.min.js"></script>
-            <script src="assets/scripts.js"></script>
+        <!--/.fluid-container-->
+        <script src="bootstrap/js/jquery-1.9.1.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/scripts.js"></script>
 
 
 
