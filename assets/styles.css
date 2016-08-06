@@ -212,6 +212,6 @@ height: auto;
     padding-left: 500px;*/
 }
 
-#shadow{
-    background-color: grey;
+.shadow{
+ -webkit-filter:brightness(90%);
 }
