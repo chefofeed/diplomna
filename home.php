@@ -146,20 +146,23 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
                                     <input type="text" name="Help text" value="Help text" class="form-control">
                                 </div>
                                 <label>Question Type:</label>
-                                <select id="Selector" >
-                                    <option value="1" >Text </option> 
-                                    <option value="2">Multiple choice </option>                    
-                                    <option value="3">Choose from a list </option>
-                                    <option value="4">Radio button </option>
+                                <select id="Selector">
+                                    <option value="1">Select </option> 
+                                    <option value="2">Text </option> 
+                                    <option value="3">Multiple choice </option>                    
+                                    <option value="4">Choose from a list </option>
+                                    <option value="5">Radio button </option>
+                                    <option value="6">Paragraph text</option> 
                                 </select>
-                                <div id="content" class="container-fluid">
-                                </div>
+                                <div id="content" class="container-fluid">                                
+                                </div>   
+                                <button type="button" class="btn btn-primary">Done</button>
                             </form>  
                         </div>
                     </div>
                 </div>
             </div>
-
+        </div>
             <!--/.fluid-container-->
             <script src="bootstrap/js/jquery-1.9.1.min.js"></script>
             <script src="bootstrap/js/bootstrap.min.js"></script>

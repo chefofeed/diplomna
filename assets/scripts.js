@@ -34,62 +34,64 @@ $(function () {
 //    var x = document.getElementById("mySelect").value;
 //    document.getElementById("demo").innerHTML = "You selected: " + x;
 //}
+
+
 $("#Selector").change(function(){
     console.log($(this).val());
     var html = '';
     switch ($(this).val()){
-        case '1':
-            html = '<input type = "text">';
+        case '2':
+            html = '<div class="row"><div class="col-lg-6">'+
+      '<input type="text" class="form-control" aria-label="..." value="Add your text here!" disabled="disabled">'+
+        '</div></div></div>';
             
             break;
-        case '2':
-            html = '<div class="row">'+
-                 '<div class="col-lg-6">'+
-    '<div class="input-group">'+
-      '<span class="input-group-addon">'+
-        '<input type="checkbox" aria-label="...">'+
-      '</span>'+
-      '<input type="text" class="form-control" aria-label="...">'+
+        case '3':
+            html = '<div class="row"><div class="col-lg-6"><div class="input-group"><span class="input-group-addon">'+
+        '<input type="checkbox" aria-label="..." disabled="disabled"></span><input type="text" class="form-control" aria-label="..." value="Option 1">'+
     '</div></div></div>'
                     +
-                '<div class="row">'+
-                 '<div class="col-lg-6">'+
-    '<div class="input-group">'+
-      '<span class="input-group-addon">'+
-        '<input type="checkbox" aria-label="...">'+
-      '</span>'+
+                '<div class="row"><div class="col-lg-6"><div class="input-group">'+
+      '<span class="input-group-addon"><input type="checkbox" aria-label="..."disabled="disabled"></span>'+
       '<input type="text" class="form-control shadow"  value="click to add option"  aria-label="...">'+
     '</div></div></div>';
             break;
-        case '3':
-            html = '<select name="list" form="form">';
-            break;
         case '4':
-           html = '<div class="row">'+
-                 '<div class="col-lg-6">'+
+            html =
+        '<div class="row"><div class="col-lg-6">'+
     '<div class="input-group">'+
-      '<span class="input-group-addon">'+
-        '<input type="radio" aria-label="..." name="optionsRadios" id="optionsRadios1">'+
-      '</span>'+
-      '<input type="text" class="form-control" aria-label="...">'+
+      '<input type="text" class="form-control " aria-label="..." value="Option 1">'+
+        '</div></div></div>'+
+        
+        
+'<div class="row"><div class="col-lg-6">'+
+    '<div class="input-group">'+
+      '<input type="text" class="form-control shadow" aria-label="..." value="click to add option">'+
+        '</div></div></div>'
+
+            break;
+        case '5':
+           html = '<div class="row"><div class="col-lg-6">'+
+    '<div class="input-group"><span class="input-group-addon">'+
+        '<input type="radio" aria-label="..." name="optionsRadios" id="optionsRadios1" disabled="disabled"></span>'+
+      '<input type="text" class="form-control" aria-label="..." value="Option 1" >'+
         '</div></div></div>'
                     +
-                '<div class="row" >'+
-                 '<div class="col-lg-6" >'+
-    '<div class="input-group" >'+
+    '<div class="row" ><div class="col-lg-6" ><div class="input-group" >'+
       '<span class="input-group-addon">'+
-        '<input  type="radio" aria-label="..." name="optionsRadios" id="optionsRadios2">'+
-      '</span>'+
-      '<input type="text" class="form-control shadow" value="click to add option"   aria-label="...">'+
+        '<input  type="radio" aria-label="..." name="optionsRadios" id="optionsRadios2" disabled="disabled"></span>'+
+      '<input type="text" class="form-control shadow" value="click to add option"   aria-label="..." '+
    '</div></div></div>';
             break;
-        
+           case '6':
+            html = '<div class="row"><div class="col-lg-6"><div class="textarea">your text</div></div></div>';
+            break;
     }
     $('#content').html(html);
     
 });
 //add new element
-$('body').on('click', '.shadow', function(){
+$('body').on('click', '.shadow ', function(){
     var button = '<span class="input-group-btn"><button class="btn btn-default remove_option" type="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></span>';
     var element = $(this).closest('.row').clone();
     var index = $('#content .row').index($(this).closest('.row')) + 1;

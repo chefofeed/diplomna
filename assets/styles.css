@@ -215,3 +215,11 @@ height: auto;
 .shadow{
  -webkit-filter:brightness(90%);
 }
+.textarea{
+    border-style: dashed;
+    background-color:gainsboro;
+    width: auto;
+    height: 80px;
+    text-align: center;
+   line-height: 80px;
+}
