@@ -148,7 +148,7 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
                                                 <span class="input-group-addon">
                                                     <input type="radio" aria-label="...">
                                                 </span>
-                                                <input type="text" class="form-control" aria-label="..."class="form-control" value="Option 33">
+                                                <input type="text" class="form-control" aria-label="..."class="form-control" value="Option 1">
                                             </div><!-- /input-group -->
                                         </div> 
                                     </div>

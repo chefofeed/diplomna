@@ -36,7 +36,7 @@ $(function () {
 //}
 
 
-$('body').on('change','#Selector',function () {
+$('body').on('change', '#Selector', function () {
     console.log($(this).val());
     var html = '';
     switch ($(this).val()) {
@@ -47,10 +47,10 @@ $('body').on('change','#Selector',function () {
 
             break;
         case '3':
-            if($('#content input[type="radio"], #content input.list').length > 0 ){
-                $('#content input[type="radio"], #content input[type="hidden"]').each(function(ind, el){
-                    $(el).attr('type','checkbox');
-                }); 
+            if ($('#content input[type="radio"], #content input.list').length > 0) {
+                $('#content input[type="radio"], #content input[type="hidden"]').each(function (ind, el) {
+                    $(el).attr('type', 'checkbox');
+                });
                 return;
             }
             html = '<div class="row"><div class="col-lg-6"><div class="input-group"><span class="input-group-addon">' +
@@ -63,31 +63,31 @@ $('body').on('change','#Selector',function () {
                     '</div></div></div>';
             break;
         case '4':
-         if($('#content input[type="checkbox"], #contentinput[type="radio"]').length > 0 ){
-                $('#content input[type="checkbox"], #content input[type="radio"]').each(function(ind, el){
-                    $(el).attr('type','hidden');
-                }); 
+            if ($('#content input[type="checkbox"], #contentinput[type="radio"]').length > 0) {
+                $('#content input[type="checkbox"], #content input[type="radio"]').each(function (ind, el) {
+                    $(el).attr('type', 'hidden');
+                });
                 return;
             }
             html =
                     '<div class="row"><div class="col-lg-6">' +
                     '<div class="input-group">' +
                     '<span class="input-group-addon">' +
-                    '<input  type="hidden" aria-label="..." name="optionsRadios" id="optionsRadios2" disabled="disabled"></span>'+
+                    '<input  type="hidden" aria-label="..." name="optionsRadios" id="optionsRadios2" disabled="disabled"></span>' +
                     '<input type="text" class="form-control list" aria-label="..." value="Option 1">' +
                     '</div></div></div>' +
                     '<div class="row"><div class="col-lg-6">' +
                     '<div class="input-group">' +
                     '<span class="input-group-addon">' +
-                    '<input  type="hidden" aria-label="..." name="optionsRadios" id="optionsRadios2" disabled="disabled"></span>'+
+                    '<input  type="hidden" aria-label="..." name="optionsRadios" id="optionsRadios2" disabled="disabled"></span>' +
                     '<input type="text" class="form-control shadow list" aria-label="..." value="click to add option">' +
                     '</div></div></div>';
             break;
         case '5':
-            if($('#content input[type="checkbox"], #contentinput[type="hidden"]').length > 0 ){
-                $('#content input[type="checkbox"], #content input[type="hidden"]').each(function(ind, el){
-                    $(el).attr('type','radio');
-                }); 
+            if ($('#content input[type="checkbox"], #contentinput[type="hidden"]').length > 0) {
+                $('#content input[type="checkbox"], #content input[type="hidden"]').each(function (ind, el) {
+                    $(el).attr('type', 'radio');
+                });
                 return;
             }
             html = '<div class="row"><div class="col-lg-6">' +
@@ -111,6 +111,7 @@ $('body').on('change','#Selector',function () {
 });
 //add new element
 $('body').on('click', '.shadow ', function () {
+    console.log('shadowwwww');
     var button = '<span class="input-group-btn"><button class="btn btn-default remove_option" type="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></span>';
     var element = $(this).closest('.row').clone();
     var index = $('#content .row').index($(this).closest('.row')) + 1;
@@ -146,7 +147,7 @@ $('body').on('mouseleave', '.question', function () {
 });
 
 $('body').on('click', '.question .option', function () {
-    console.log('fa');
+    console.log('optin edit');
     var container = $(this).closest('.question');
     var quest = container.clone();
     container.empty();
@@ -168,8 +169,9 @@ $('body').on('click', '.question .option', function () {
             '</select>' +
             '<div id="content" class="container-fluid">' +
             ' </div>' +
-            '<button type="button" class="btn btn-primary">Done</button>' +
-            ' </div>';
+            '<div class="form-group">'+
+            '<button type="button" class="btn btn-primary  ready">Done</button>' +
+            ' </div> </div>';
 
     container.append(html);
     var title = quest.find('h2').html();
@@ -213,18 +215,82 @@ $('body').on('click', '.question .option', function () {
                     break;
                 }
             }
-            
+
         }
     });
-    if(type != undefined){
+    
+    if (type != undefined) {
         $('#content').append('<div class="row"><div class="col-lg-6">' +
+                '<div class="input-group">' +
+                '<span class="input-group-addon">' +
+                '<input  type="' + type + '" aria-label="..." name="optionsRadios" id="optionsRadios2" disabled="disabled"></span>' +
+                '<input type="text" class="form-control shadow list" aria-label="..." value="click to add option">' +
+                '</div></div></div>');
+    }
+});
+$('body').on('click', '.ready', function () {
+    //get values
+    var title = $('[name="question-title"]').val();
+    var helptext = $('[name="htext"]').val();
+    var type = $('#Selector').val();
+    var values = new Array();
+    switch (type) {
+        case'3':
+        case'4':
+        case'5':
+            $('#content input[type="text"]:not(".shadow")').each(function (ind, el) {
+                values.push($(el).val());
+            });
+            break;
+    }
+    console.log(values);
+
+    $('.question').empty();
+    if (title == undefined || title=='') {
+        title = "Untitled Question";
+    }
+    var html = '<h2>' + title + '</h2>';
+    html += '<input type="hidden" name="htext" value="' + helptext + '">';
+    console.log(html);
+    switch (type) {
+        case'2':
+            html += '<div class="form-group option"><input type="text" disabled="disabled"></div>';
+            console.log(html);
+            break;
+        case '3':
+            for(var i=0;i<values.length;i++){
+                html +='<div class="row"><div class="col-lg-6">' +
+                    '<div class="input-group option">'+
+                    '<span class="input-group-addon">' +
+                    '<input type="checkbox" aria-label="..." name="optionsRadios" id="optionsRadios1" disabled="disabled"></span>' +
+                    '<input type="text" class="form-control" aria-label="..." value="'+values[i]+'" >' +
+                    '</div></div></div>' ;        
+            }
+            break;
+            case '4':
+            for(var i=0;i<values.length;i++){
+                html +='<div class="row"><div class="col-lg-6">' +
                     '<div class="input-group">' +
                     '<span class="input-group-addon">' +
-                    '<input  type="'+type+'" aria-label="..." name="optionsRadios" id="optionsRadios2" disabled="disabled"></span>'+
-                    '<input type="text" class="form-control shadow list" aria-label="..." value="click to add option">' +
-                    '</div></div></div>');
+                    '<input  type="hidden" aria-label="..." name="optionsRadios" id="optionsRadios2" disabled="disabled"></span>' +
+                    '<input type="text" class="form-control list" aria-label="..." value="'+values[i]+'">' +
+                    '</div></div></div>';
+                       
+            }
+            break;
+            case '5':
+            for(var i=0;i<values.length;i++){
+                html +='<div class="row"><div class="col-lg-6">' +
+                    '<div class="input-group option"><span class="input-group-addon">' +
+                    '<input type="radio" aria-label="..." name="optionsRadios" id="optionsRadios1" disabled="disabled"></span>' +
+                    '<input type="text" class="form-control" aria-label="..." value="'+values[i]+'" >' +
+                    '</div></div></div>' ;        
+            }
+            break;
+             case'6':
+            html += '<div class="row"><div class="col-lg-6"><div class="textarea">your text</div></div></div>';
+            console.log(html);
+            break;
     }
-
-    console.log(title);
-
+    $('.question').append(html);
 });
