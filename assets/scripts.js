@@ -104,6 +104,7 @@ $('body').on('change', '#Selector', function () {
             break;
         case '6':
             html = '<div class="row"><div class="col-lg-6"><div class="textarea">your text</div></div></div>';
+            console.log(html);
             break;
     }
     $('#content').html(html);
@@ -198,9 +199,9 @@ $('body').on('click', '.question .option', function () {
                 case 'text':
                 {
                     $('#Selector').val(2);
-                    $('#content').append('<div class="row"><div class="col-lg-6">' +
+                    $('#content').append('<div class="row"><div class="col-lg-6"><div class="form-group">' +
                             '<input type="text" class="form-control" aria-label="..." value="Add your text here!" disabled="disabled">' +
-                            '</div></div></div>');
+                            '</div></div></div></div>');
                     break;
                 }
                 case 'checkbox':
@@ -213,13 +214,14 @@ $('body').on('click', '.question .option', function () {
                             '</div></div></div>');
                     $('#content input[type="text"]').last().val($(el).find('input[type="text"]').val());
                     break;
+                    
                 }
             }
 
         }
     });
     
-    if (type != undefined) {
+    if (type != undefined && type!='text') {
         $('#content').append('<div class="row"><div class="col-lg-6">' +
                 '<div class="input-group">' +
                 '<span class="input-group-addon">' +
@@ -288,7 +290,7 @@ $('body').on('click', '.ready', function () {
             }
             break;
              case'6':
-            html += '<div class="row"><div class="col-lg-6"><div class="textarea">your text</div></div></div>';
+            html += '<div class="row"><div class="col-lg-6"><div class="textarea option">your text</div></div></div>';
             console.log(html);
             break;
     }

@@ -1,14 +1,15 @@
 <?php
-class Database
+require_once 'Singleton.php';
+class Database extends Singleton
 {
      
     private $host = "localhost";
     private $db_name = "datab";
     private $username = "root";
     private $password = "";
-    public $conn;
+    protected $conn;
      
-    public function dbConnection()
+    protected function __construct()
 	{
      
 	    $this->conn = null;    
@@ -22,6 +23,10 @@ class Database
             echo "Connection error: " . $exception->getMessage();
         }
          
+        //return $this->conn;
+    }
+    
+    public function getConnection(){
         return $this->conn;
     }
 }

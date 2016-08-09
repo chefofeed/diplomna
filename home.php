@@ -142,7 +142,9 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
                                 <div class="question">
                                     <div class="row">
                                         <div class="col-lg-6">
+                                            <div class="form-group">
                                             <h2>Untitled Question</h2> 
+                                            </div>
                                             <input type="hidden" name="htext">   
                                             <div class="input-group option">
                                                 <span class="input-group-addon">
