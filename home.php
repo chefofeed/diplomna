@@ -132,7 +132,7 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
                             Page 1/1
                         </div>
                         <div class="panel-body">
-                            <form>
+                            <form id="survey">
                                 <div class="form-group">
                                     <input type="text" name="formtitle" placeholder="Form title" class="form-control">
                                 </div>
@@ -143,7 +143,7 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                            <h2>Untitled Question</h2> 
+                                                <h2>Untitled Question</h2> 
                                             </div>
                                             <input type="hidden" name="htext">   
                                             <div class="input-group option">
@@ -154,8 +154,11 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
                                             </div><!-- /input-group -->
                                         </div> 
                                     </div>
-                                </div>   
-                            </form>
+                                </div>        
+                                <div class="form-group">
+                                    <button type="button" id="submit-question"  class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>    
                         </div>
                     </div>
                 </div>

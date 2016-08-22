@@ -63,7 +63,7 @@ $('body').on('change', '#Selector', function () {
                     '</div></div></div>';
             break;
         case '4':
-            if ($('#content input[type="checkbox"], #contentinput[type="radio"]').length > 0) {
+            if ($('#content input[type="checkbox"], #content input[type="radio"]').length > 0) {
                 $('#content input[type="checkbox"], #content input[type="radio"]').each(function (ind, el) {
                     $(el).attr('type', 'hidden');
                 });
@@ -84,7 +84,7 @@ $('body').on('change', '#Selector', function () {
                     '</div></div></div>';
             break;
         case '5':
-            if ($('#content input[type="checkbox"], #contentinput[type="hidden"]').length > 0) {
+            if ($('#content input[type="checkbox"], #content input[type="hidden"]').length > 0) {
                 $('#content input[type="checkbox"], #content input[type="hidden"]').each(function (ind, el) {
                     $(el).attr('type', 'radio');
                 });
@@ -173,7 +173,7 @@ $('body').on('click', '.question .option', function () {
             '<div class="form-group">'+
             '<button type="button" class="btn btn-primary  ready">Done</button>' +
             ' </div> </div>';
-
+    
     container.append(html);
     var title = quest.find('h2').html();
     container.find('[name="question-title"]').val(title);
@@ -196,11 +196,30 @@ $('body').on('click', '.question .option', function () {
                     $('#content input[type="text"]').last().val($(el).find('input[type="text"]').val());
                     break;
                 }
+                 case 'list':
+                {
+                    $('#Selector').val(4);
+                    $('#content').append('<div class="row"><div class="col-lg-6">' +
+                            '<div class="input-group"><span class="input-group-addon">' +
+                            '<input type="hidden" aria-label="..." name="optionsRadios" id="optionsRadios1" disabled="disabled"></span>' +
+                            '<input type="text" class="form-control" aria-label="..." value="" >' +
+                            '</div></div></div>');
+                    $('#content input[type="text"]').last().val($(el).find('input[type="text"]').val());
+                    break;
+                }
                 case 'text':
                 {
                     $('#Selector').val(2);
                     $('#content').append('<div class="row"><div class="col-lg-6"><div class="form-group">' +
                             '<input type="text" class="form-control" aria-label="..." value="Add your text here!" disabled="disabled">' +
+                            '</div></div></div></div>');
+                    break;
+                }
+                 case 'Paragraph':
+                {
+                    $('#Selector').val(6);
+                    $('#content').append('<div class="row"><div class="col-lg-6"><div class="form-group">' +
+                            '<input type="textarea" class="form-control" aria-label="..." value=" text here!" disabled="disabled">' +
                             '</div></div></div></div>');
                     break;
                 }
@@ -295,4 +314,11 @@ $('body').on('click', '.ready', function () {
             break;
     }
     $('.question').append(html);
+});
+//submit button on click
+$('#submit-question').on('click', function () {
+   $.post('savesurvey.php',$('#survey').serialize(), function(resp){
+      console.log(resp);
+      return;
+   });
 });

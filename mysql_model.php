@@ -15,19 +15,44 @@ class Mysql_model {
         $this->conn = Database::getInstance()->getConnection();
         $query = $this->conn->query('DESCRIBE '.$this->table);
         $this->tableStruct = $query->fetchAll(PDO::FETCH_COLUMN, 'Field');
-        error_log('DESCRIBE '.$this->table);
+        //error_log('DESCRIBE '.$this->table);
         error_log(var_export($this->tableStruct, TRUE));
     }
 
     public function insert($data) {
         try {
             $this->checkFields($data);
-            $stmt = $this->conn->prepare("INSERT INTO ".$this->table."(userName,userEmail,userPass,tokenCode) 
-			                                             VALUES(:user_name, :user_mail, :user_pass, :active_code)");
-            $stmt->bindparam(":user_name", $uname);
-            $stmt->bindparam(":user_mail", $email);
-            $stmt->bindparam(":user_pass", $password);
-            $stmt->bindparam(":active_code", $code);
+            $query ="INSERT INTO ".$this->table."(";//userName,userEmail,userPass,tokenCode) 
+			                                            // VALUES(";
+            foreach ($this->tableStruct as $key => $value) {
+                if($value == 'id'){
+                    continue;
+                }
+                $query.= $value.','; 
+            }
+            $query = rtrim($query, ',');
+            $query.= ") VALUES(";
+            foreach ($this->tableStruct as $key => $value) {
+                if($value == 'id'){
+                    continue;
+                }
+                $query.= ':'.$value.','; 
+            }
+            $query = rtrim($query, ',');
+             $query.= ')';
+             error_log($query); 
+             //:user_name, :user_mail, :user_pass, :active_code )";
+            $stmt = $this->conn->prepare($query);
+            foreach ($this->tableStruct as $key => $value) {
+                if($value == 'id'){
+                    continue;
+                }
+                $stmt->bindparam(":".$value, $data[$value]);
+            }
+//            $stmt->bindparam(":user_name", $uname);
+//            $stmt->bindparam(":user_mail", $email);
+//            $stmt->bindparam(":user_pass", $password);
+//            $stmt->bindparam(":active_code", $code);
             $stmt->execute();
             return $stmt;
         } catch (PDOException $ex) {
