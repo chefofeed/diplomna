@@ -79,6 +79,10 @@ class Mysql_model {
             echo $ex->getMessage();
         }
     }
+    
+    public function lastInsertId(){
+        return $this->conn->lastInsertId(); 
+    }
 
     private function query() {
         

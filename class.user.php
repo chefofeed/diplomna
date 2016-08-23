@@ -18,10 +18,10 @@ class USER extends Mysql_model {
         return $stmt;
     }
 
-    public function lasdID() {
-        $stmt = $this->conn->lastInsertId();
-        return $stmt;
-    }
+//    public function lasdID() {
+//        $stmt = $this->conn->lastInsertId();
+//        return $stmt;
+//    }
 
     public function register($uname, $email, $upass, $code) {
         try {
@@ -102,6 +102,10 @@ class USER extends Mysql_model {
         $mail->AddReplyTo("heroesname1992@gmail.com", "POll page");
         $mail->MsgHTML($message);
         $mail->Send();
+    }
+    
+    function getUser(){
+        return $_SESSION['userSession'];
     }
 
 }

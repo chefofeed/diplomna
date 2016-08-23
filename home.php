@@ -145,12 +145,12 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
                                             <div class="form-group">
                                                 <h2>Untitled Question</h2> 
                                             </div>
-                                            <input type="hidden" name="htext">   
+                                            <input type="hidden" name="htext" >   
                                             <div class="input-group option">
-                                                <span class="input-group-addon">
+                                                <span class="input-group-addon type">
                                                     <input type="radio" aria-label="...">
                                                 </span>
-                                                <input type="text" class="form-control" aria-label="..."class="form-control" value="Option 1">
+                                                <input type="text" class="form-control" aria-label="..."class="form-control answer" value="Option 1">
                                             </div><!-- /input-group -->
                                         </div> 
                                     </div>
