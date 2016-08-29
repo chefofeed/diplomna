@@ -52,12 +52,12 @@ $('body').on('change', '#Selector', function () {
                 });
                 return;
             }
-            html = '<div class="row"><div class="col-lg-6"><div class="input-group"><span class="input-group-addon type">' +
-                    '<input type="checkbox" aria-label="..." disabled="disabled"></span><input type="text" class="form-control answer " aria-label="..." value="Option 1">' +
+            html = '<div class="row"><div class="col-lg-6"><div class="input-group"><span class="input-group-addon">' +
+                    '<input type="checkbox" aria-label="..." class="type" disabled="disabled"></span><input type="text" class="form-control  " aria-label="..." value="Option 1">' +
                     '</div></div></div>'
                     +
                     '<div class="row"><div class="col-lg-6"><div class="input-group">' +
-                    '<span class="input-group-addon type"><input type="checkbox" aria-label="..."disabled="disabled"></span>' +
+                    '<span class="input-group-addon "><input type="checkbox" aria-label="..." class="type" disabled="disabled"></span>' +
                     '<input type="text" class="form-control shadow answer"  value="click to add option"  aria-label="...">' +
                     '</div></div></div>';
             break;
@@ -72,13 +72,13 @@ $('body').on('change', '#Selector', function () {
                     '<div class="row"><div class="col-lg-6">' +
                     '<div class="input-group">' +
                     '<span class="input-group-addon">' +
-                    '<input  type="hidden" aria-label="..." name="optionsRadios" id="optionsRadios2" disabled="disabled"></span>' +
+                    '<input  type="hidden" aria-label="..."  class="type" name="optionsRadios" id="optionsRadios2" disabled="disabled"></span>' +
                     '<input type="text" class="form-control list answer" aria-label="..." value="Option 1">' +
                     '</div></div></div>' +
                     '<div class="row"><div class="col-lg-6">' +
                     '<div class="input-group">' +
                     '<span class="input-group-addon">' +
-                    '<input  type="hidden" aria-label="..." name="optionsRadios" id="optionsRadios2" disabled="disabled"></span>' +
+                    '<input  type="hidden" aria-label="..."  class="type" name="optionsRadios" id="optionsRadios2" disabled="disabled"></span>' +
                     '<input type="text" class="form-control shadow list answer" aria-label="..." value="click to add option">' +
                     '</div></div></div>';
             break;
@@ -90,14 +90,14 @@ $('body').on('change', '#Selector', function () {
                 return;
             }
             html = '<div class="row"><div class="col-lg-6">' +
-                    '<div class="input-group"><span class="input-group-addon type">' +
-                    '<input type="radio" aria-label="..." name="optionsRadios" id="optionsRadios1" disabled="disabled"></span>' +
+                    '<div class="input-group"><span class="input-group-addon ">' +
+                    '<input type="radio" aria-label="..." class="type" name="optionsRadios" id="optionsRadios1" disabled="disabled"></span>' +
                     '<input type="text" class="form-control answer" aria-label="..." value="Option 1" >' +
                     '</div></div></div>'
                     +
-                    '<div class="row" ><div class="col-lg-6" ><div class="input-group type" >' +
+                    '<div class="row" ><div class="col-lg-6" ><div class="input-group" >' +
                     '<span class="input-group-addon">' +
-                    '<input  type="radio" aria-label="..." name="optionsRadios" id="optionsRadios2" disabled="disabled"></span>' +
+                    '<input  type="radio" aria-label="..."  class="type" name="optionsRadios" id="optionsRadios2" disabled="disabled"></span>' +
                     '<input type="text" class="form-control shadow answer" value="click to add option"   aria-label="..." ' +
                     '</div></div></div>';
             break;
@@ -183,8 +183,8 @@ $('body').on('click', '.question .option', function () {
                 {
                     $('#Selector').val(5);
                     $('#content').append('<div class="row"><div class="col-lg-6">' +
-                            '<div class="input-group"><span class="input-group-addon type">' +
-                            '<input type="radio" aria-label="..." name="optionsRadios" id="optionsRadios1" disabled="disabled"></span>' +
+                            '<div class="input-group"><span class="input-group-addon">' +
+                            '<input type="radio" aria-label="..."  class="type" name="optionsRadios" id="optionsRadios1" disabled="disabled"></span>' +
                             '<input type="text" class="form-control answer" aria-label="..." value="" >' +
                             '</div></div></div>');
                     $('#content input[type="text"]').last().val($(el).find('input[type="text"]').val());
@@ -195,7 +195,7 @@ $('body').on('click', '.question .option', function () {
                     $('#Selector').val(4);
                     $('#content').append('<div class="row"><div class="col-lg-6">' +
                             '<div class="input-group"><span class="input-group-addon">' +
-                            '<input type="hidden" aria-label="..." name="optionsRadios" id="optionsRadios1" disabled="disabled"></span>' +
+                            '<input type="hidden" aria-label="..." class="type" name="optionsRadios" id="optionsRadios1" disabled="disabled"></span>' +
                             '<input type="text" class="form-control answer" aria-label="..." value="" >' +
                             '</div></div></div>');
                     $('#content input[type="text"]').last().val($(el).find('input[type="text"]').val());
@@ -221,8 +221,8 @@ $('body').on('click', '.question .option', function () {
                 {
                     $('#Selector').val(3);
                     $('#content').append('<div class="row"><div class="col-lg-6">' +
-                            '<div class="input-group"><span class="input-group-addon type">' +
-                            '<input type="checkbox" aria-label="..." name="optionsRadios" id="optionsRadios1" disabled="disabled"></span>' +
+                            '<div class="input-group"><span class="input-group-addon">' +
+                            '<input type="checkbox" aria-label="..." class="type" name="optionsRadios" id="optionsRadios1" disabled="disabled"></span>' +
                             '<input type="text" class="form-control answer" aria-label="..." value="" >' +
                             '</div></div></div>');
                     $('#content input[type="text"]').last().val($(el).find('input[type="text"]').val());
@@ -238,7 +238,7 @@ $('body').on('click', '.question .option', function () {
         $('#content').append('<div class="row"><div class="col-lg-6">' +
                 '<div class="input-group">' +
                 '<span class="input-group-addon">' +
-                '<input  type="' + type + '" aria-label="..." name="optionsRadios" id="optionsRadios2" disabled="disabled"></span>' +
+                '<input  type="' + type + '" aria-label="..." class="type" name="optionsRadios" id="optionsRadios2" disabled="disabled"></span>' +
                 '<input type="text" class="form-control shadow list" aria-label="..." value="click to add option">' +
                 '</div></div></div>');
     }
@@ -249,6 +249,7 @@ $('body').on('click', '.ready', function () {
     var helptext = $('[name="htext"]').val();
     var type = $('#Selector').val();
     var values = new Array();
+    var container = $(this).closest('.question');
     switch (type) {
         case'3':
         case'4':
@@ -259,7 +260,7 @@ $('body').on('click', '.ready', function () {
             break;
     }
 
-    $('.question').empty();
+    $(this).closest('.question').empty();
     if (title == undefined || title=='') {
         title = "Untitled Question";
     }
@@ -267,14 +268,14 @@ $('body').on('click', '.ready', function () {
     html += '<input type="hidden" name="htext" value="' + helptext + '">';
     switch (type) {
         case'2':
-            html += '<div class="form-group option"><input type="text" disabled="disabled"></div>';
+            html += '<div class="form-group option"><input  class="type" type="text" disabled="disabled"></div>';
             break;
         case '3':
             for(var i=0;i<values.length;i++){
                 html +='<div class="row"><div class="col-lg-6">' +
                     '<div class="input-group option">'+
-                    '<span class="input-group-addon type">' +
-                    '<input type="checkbox" aria-label="..." name="optionsRadios" id="optionsRadios1" disabled="disabled"></span>' +
+                    '<span class="input-group-addon">' +
+                    '<input type="checkbox" aria-label="..."  class="type"name="optionsRadios" id="optionsRadios1" disabled="disabled"></span>' +
                     '<input type="text" class="form-control answer" aria-label="..." value="'+values[i]+'" >' +
                     '</div></div></div>' ;        
             }
@@ -284,7 +285,7 @@ $('body').on('click', '.ready', function () {
                 html +='<div class="row"><div class="col-lg-6">' +
                     '<div class="input-group">' +
                     '<span class="input-group-addon">' +
-                    '<input  type="hidden" aria-label="..." name="optionsRadios" id="optionsRadios2" disabled="disabled"></span>' +
+                    '<input  type="hidden" aria-label="..." class="type" name="optionsRadios" id="optionsRadios2" disabled="disabled"></span>' +
                     '<input type="text" class="form-control list" aria-label="..." value="'+values[i]+'">' +
                     '</div></div></div>';
                        
@@ -293,40 +294,58 @@ $('body').on('click', '.ready', function () {
             case '5':
             for(var i=0;i<values.length;i++){
                 html +='<div class="row"><div class="col-lg-6">' +
-                    '<div class="input-group option"><span class="input-group-addon type">' +
-                    '<input type="radio" aria-label="..." name="optionsRadios" id="optionsRadios1" disabled="disabled"></span>' +
+                    '<div class="input-group option"><span class="input-group-addon ">' +
+                    '<input type="radio"  class="type" aria-label="..." name="optionsRadios" id="optionsRadios1" disabled="disabled"></span>' +
                     '<input type="text" class="form-control answer" aria-label="..." value="'+values[i]+'" >' +
                     '</div></div></div>' ;        
             }
             break;
              case'6':
-            html += '<div class="row"><div class="col-lg-6"><div class="textarea option answer">your text</div></div></div>';
+            html += '<div class="row"><div class="col-lg-6"><div class="textarea option  type">your text</div></div></div>';
             break;
     }
-    $('.question').append(html);
+    container.append(html);
+    console.log(html);
 });
 //submit button on click
 $('#submit-question').on('click', function () {
     var data = {};
     data['formtitle'] = $('[name="formtitle"]').val();
     data['description'] =$('[name="formdescription"]').val();
-    console.log(data);
+    
     data['questions']= new Array;
     $('.question').each(function(i,el){
         data['questions'][i] = {};
         data['questions'][i]['question'] = $('h2', this).html();
-        data['questions'][i]['type'] = $('.type', this).attr('type');
-        if(data['questions'][i]['type'] == 'text'){   /// || OR
+        data['questions'][i]['type'] = $('.type', this).is('div.textarea')?'textarea': $('.type', this).attr('type');
+        data['questions'][i]['answers'] = new Array;
+        if(data['questions'][i]['type'] == 'text'){   
             return true;
         }
-        data['questions'][i]['asnwers'] = new Array;
-        $('.answer').each(function(j, el){
-            data['questions'][i]['asnwers'][j] = $(el).val();
+        $('.answer').each(function(j, el){     
+            data['questions'][i]['answers'][j] = $(el).val();
+            
         });
     });
-    console.log(data);
    $.post('savesurvey.php',data, function(resp){
       console.log(resp);
       return;
    });
+});
+
+$('#add_question').on('click', function (){
+    var html = '<div class="question">'+
+                                    '<div class="row">'+
+                                        '<div class="col-lg-6">'+
+                                            '<div class="form-group">'+
+                                                '<h2>Untitled Question</h2>'+
+                                                '</div>'+
+                                            '<input type="hidden" name="htext" >'+   
+                                            '<div class="input-group option">'+
+                                                '<span class="input-group-addon">'+
+                                                    '<input type="radio" aria-label="..." class="type"></span>'+
+                                                '<input type="text" class="form-control" aria-label="..."class="form-control answer" value="Option 1">'+
+                                            '</div>'+
+                                        '</div><div></div>';
+    $(this).before(html);
 });

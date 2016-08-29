@@ -1,14 +1,4 @@
 <?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-//main page - all forms
-
-
 session_start();
 require_once 'class.user.php';
 $user_home = new USER();
@@ -38,9 +28,8 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
         <link type="text/css" href="assets/styles.css" rel="stylesheet" media="screen">
     </head>
     <body >
-        <!--<div class="navbar navbar-defaul">-->
-<!--            <div class="navbar-inner">-->
-<nav class="navbar navbar-inverse">
+        <div class="navbar navbar-default">
+            <div class="navbar-inner">
                 <div class="container-fluid">
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -132,10 +121,53 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
                         </li>
                     </ul>
                 </div> 
-<!--            </div>       -->
-<!--        </div>        -->
+            </div>       
+        </div>        
+        <! --/nav-bar
+        <div class="container ">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            Page 1/1
+                        </div>
+                        <div class="panel-body">
+                            <form id="survey">
+                                <div class="form-group">
+                                    <input type="text" name="formtitle" placeholder="Form title" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="formdescription" placeholder="Form Description" class="form-control"> 
+                                </div>
+                                <div class="question">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <h2>Untitled Question</h2> 
+                                            </div>
+                                            <input type="hidden" name="htext" >   
+                                            <div class="input-group option">
+                                                <span class="input-group-addon">
+                                                    <input type="radio" aria-label="..." class="type">
+                                                </span>
+                                                <input type="text" class="form-control" aria-label="..."class="form-control answer" value="Option 1">
+                                            </div>  
+                                        </div> 
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <button type="button" id="add_question"  class="btn btn-primary">Add Question</button>
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" id="submit-question"  class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!--/.fluid-container-->
-</nav>
         <script src="bootstrap/js/jquery-1.9.1.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="assets/scripts.js"></script>

@@ -34,7 +34,7 @@ if(isset($_POST['btn-signup']))
 	{
 		if($reg_user->register($uname,$email,$upass,$code))
 		{			
-			$id = $reg_user->lasdID();		
+			$id = $reg_user->lastID();		
 			$key = base64_encode($id);
 			$id = $key;
 			

@@ -59,7 +59,18 @@ class Mysql_model {
             echo $ex->getMessage();
         }
     }
+    
+    ////////////////////////////////////////////
+    
+    public function getById($id){
+        
+    }
+    
+    public function listData($criteria){
+        
+    }
 
+    /////////////////////////////////////////////////
     public function update() {
         
     }
