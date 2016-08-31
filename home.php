@@ -11,12 +11,15 @@
 
 session_start();
 require_once 'class.user.php';
+require_once 'survey_model.php';
 $user_home = new USER();
 
 if (!$user_home->is_logged_in()) {
     $user_home->redirect('index.php');
 }
-
+$survey = new Survey();
+ $survey->getSurvey(3);
+ 
 $stmt = $user_home->runQuery("SELECT * FROM tbl_users WHERE userID=:uid");
 $stmt->execute(array(":uid" => $_SESSION['userSession']));
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -121,7 +124,7 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
                     </div>
                     <ul class="nav pull-right">
                         <li class="dropdown">
-                            <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> 
+                            <a href="#" role="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> 
                                 <?php echo $row['userEmail']; ?> <i class="caret"></i>
                             </a>
                             <ul class="dropdown-menu">

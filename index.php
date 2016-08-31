@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once 'class.user.php';
-error_log('user instance');
+//error_log('user instance');
 $user_login = new USER();
 
 if($user_login->is_logged_in()!="")
@@ -13,7 +13,7 @@ if(isset($_POST['btn-login']))
 {
 	$email = trim($_POST['txtemail']);
 	$upass = trim($_POST['txtupass']);
-	error_log('user login');
+//	error_log('user login');
 	if($user_login->login($email,$upass))
 	{
 		$user_login->redirect('home.php');

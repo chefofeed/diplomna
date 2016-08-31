@@ -8,8 +8,8 @@ class USER extends Mysql_model {
 //	
     public function __construct() {
         $this->table = 'tbl_users';
-        error_log(var_export($this->conn, true));
-        error_log(get_class($this->conn));
+//        error_log(var_export($this->conn, true));
+//        error_log(get_class($this->conn));
         parent::__construct();
     }
 

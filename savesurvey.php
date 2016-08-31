@@ -33,7 +33,7 @@ foreach ($data['questions'] as $key => $value) {
         $answerModel->insert($answer);
     }
 
-    error_log($_SESSION['userSession']);
+//    error_log($_SESSION['userSession']);
 
     echo json_encode($data);
 }
