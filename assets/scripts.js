@@ -164,10 +164,10 @@ $('body').on('click', '.question .option', function () {
             '</select>' +
             '<div id="content" class="container-fluid">' +
             ' </div>' +
-            '<div class="form-group">'+
+            '<div class="form-group">' +
             '<button type="button" class="btn btn-primary  ready">Done</button>' +
             ' </div> </div>';
-    
+
     container.append(html);
     var title = quest.find('h2').html();
     container.find('[name="question-title"]').val(title);
@@ -190,7 +190,7 @@ $('body').on('click', '.question .option', function () {
                     $('#content input[type="text"]').last().val($(el).find('input[type="text"]').val());
                     break;
                 }
-                 case 'list':
+                case 'list':
                 {
                     $('#Selector').val(4);
                     $('#content').append('<div class="row"><div class="col-lg-6">' +
@@ -209,7 +209,7 @@ $('body').on('click', '.question .option', function () {
                             '</div></div></div></div>');
                     break;
                 }
-                 case 'Paragraph':
+                case 'Paragraph':
                 {
                     $('#Selector').val(6);
                     $('#content').append('<div class="row"><div class="col-lg-6"><div class="form-group">' +
@@ -227,14 +227,14 @@ $('body').on('click', '.question .option', function () {
                             '</div></div></div>');
                     $('#content input[type="text"]').last().val($(el).find('input[type="text"]').val());
                     break;
-                    
+
                 }
             }
 
         }
     });
-    
-    if (type != undefined && type!='text') {
+
+    if (type != undefined && type != 'text') {
         $('#content').append('<div class="row"><div class="col-lg-6">' +
                 '<div class="input-group">' +
                 '<span class="input-group-addon">' +
@@ -261,7 +261,7 @@ $('body').on('click', '.ready', function () {
     }
 
     $(this).closest('.question').empty();
-    if (title == undefined || title=='') {
+    if (title == undefined || title == '') {
         title = "Untitled Question";
     }
     var html = '<h2>' + title + '</h2>';
@@ -271,36 +271,36 @@ $('body').on('click', '.ready', function () {
             html += '<div class="form-group option"><input  class="type" type="text" disabled="disabled"></div>';
             break;
         case '3':
-            for(var i=0;i<values.length;i++){
-                html +='<div class="row"><div class="col-lg-6">' +
-                    '<div class="input-group option">'+
-                    '<span class="input-group-addon">' +
-                    '<input type="checkbox" aria-label="..."  class="type"name="optionsRadios" id="optionsRadios1" disabled="disabled"></span>' +
-                    '<input type="text" class="form-control answer" aria-label="..." value="'+values[i]+'" >' +
-                    '</div></div></div>' ;        
+            for (var i = 0; i < values.length; i++) {
+                html += '<div class="row"><div class="col-lg-6">' +
+                        '<div class="input-group option">' +
+                        '<span class="input-group-addon">' +
+                        '<input type="checkbox" aria-label="..."  class="type"name="optionsRadios" id="optionsRadios1" disabled="disabled"></span>' +
+                        '<input type="text" class="form-control answer" aria-label="..." value="' + values[i] + '" >' +
+                        '</div></div></div>';
             }
             break;
-            case '4':
-            for(var i=0;i<values.length;i++){
-                html +='<div class="row"><div class="col-lg-6">' +
-                    '<div class="input-group">' +
-                    '<span class="input-group-addon">' +
-                    '<input  type="hidden" aria-label="..." class="type" name="optionsRadios" id="optionsRadios2" disabled="disabled"></span>' +
-                    '<input type="text" class="form-control list" aria-label="..." value="'+values[i]+'">' +
-                    '</div></div></div>';
-                       
+        case '4':
+            for (var i = 0; i < values.length; i++) {
+                html += '<div class="row"><div class="col-lg-6">' +
+                        '<div class="input-group">' +
+                        '<span class="input-group-addon">' +
+                        '<input  type="hidden" aria-label="..." class="type" name="optionsRadios" id="optionsRadios2" disabled="disabled"></span>' +
+                        '<input type="text" class="form-control list" aria-label="..." value="' + values[i] + '">' +
+                        '</div></div></div>';
+
             }
             break;
-            case '5':
-            for(var i=0;i<values.length;i++){
-                html +='<div class="row"><div class="col-lg-6">' +
-                    '<div class="input-group option"><span class="input-group-addon ">' +
-                    '<input type="radio"  class="type" aria-label="..." name="optionsRadios" id="optionsRadios1" disabled="disabled"></span>' +
-                    '<input type="text" class="form-control answer" aria-label="..." value="'+values[i]+'" >' +
-                    '</div></div></div>' ;        
+        case '5':
+            for (var i = 0; i < values.length; i++) {
+                html += '<div class="row"><div class="col-lg-6">' +
+                        '<div class="input-group option"><span class="input-group-addon ">' +
+                        '<input type="radio"  class="type" aria-label="..." name="optionsRadios" id="optionsRadios1" disabled="disabled"></span>' +
+                        '<input type="text" class="form-control answer" aria-label="..." value="' + values[i] + '" >' +
+                        '</div></div></div>';
             }
             break;
-             case'6':
+        case'6':
             html += '<div class="row"><div class="col-lg-6"><div class="textarea option  type">your text</div></div></div>';
             break;
     }
@@ -308,44 +308,61 @@ $('body').on('click', '.ready', function () {
     console.log(html);
 });
 //submit button on click
-$('#submit-question').on('click', function () {
+$('body').on('click','#submit-question', function () {
     var data = {};
     data['formtitle'] = $('[name="formtitle"]').val();
-    data['description'] =$('[name="formdescription"]').val();
-    
-    data['questions']= new Array;
-    $('.question').each(function(i,el){
+    data['description'] = $('[name="formdescription"]').val();
+
+    data['questions'] = new Array;
+    $('.question').each(function (i, el) {
         data['questions'][i] = {};
         data['questions'][i]['question'] = $('h2', this).html();
-        data['questions'][i]['type'] = $('.type', this).is('div.textarea')?'textarea': $('.type', this).attr('type');
+        data['questions'][i]['type'] = $('.type', this).is('div.textarea') ? 'textarea' : $('.type', this).attr('type');
         data['questions'][i]['answers'] = new Array;
-        if(data['questions'][i]['type'] == 'text'){   
+        if (data['questions'][i]['type'] == 'text') {
             return true;
         }
-        $('.answer').each(function(j, el){     
+        $('.answer').each(function (j, el) {
             data['questions'][i]['answers'][j] = $(el).val();
-            
+
         });
     });
-   $.post('savesurvey.php',data, function(resp){
-      console.log(resp);
-      return;
-   });
+    $.post('savesurvey.php', data, function (resp) {
+        console.log(resp);
+        return;
+    });
 });
 
-$('#add_question').on('click', function (){
-    var html = '<div class="question">'+
-                                    '<div class="row">'+
-                                        '<div class="col-lg-6">'+
-                                            '<div class="form-group">'+
-                                                '<h2>Untitled Question</h2>'+
-                                                '</div>'+
-                                            '<input type="hidden" name="htext" >'+   
-                                            '<div class="input-group option">'+
-                                                '<span class="input-group-addon">'+
-                                                    '<input type="radio" aria-label="..." class="type"></span>'+
-                                                '<input type="text" class="form-control" aria-label="..."class="form-control answer" value="Option 1">'+
-                                            '</div>'+
-                                        '</div><div></div>';
+$('body').on('click','#add_question', function () {
+    var html = '<div class="question">' +
+            '<div class="row">' +
+            '<div class="col-lg-6">' +
+            '<div class="form-group">' +
+            '<h2>Untitled Question</h2>' +
+            '</div>' +
+            '<input type="hidden" name="htext" >' +
+            '<div class="input-group option">' +
+            '<span class="input-group-addon">' +
+            '<input type="radio" aria-label="..." class="type"></span>' +
+            '<input type="text" class="form-control" aria-label="..."class="form-control answer" value="Option 1">' +
+            '</div>' +
+            '</div><div></div>';
     $(this).before(html);
+});
+$('body').on('click', '#blank', function () {
+    var data = {};
+    
+    $.post('blank.php', data, function (resp) {
+        $('#page_content').html(resp);
+        console.log(resp);
+    });
+});
+
+$('body').on('click', '.survey', function () {
+    var data = {};
+    data['id'] = $(this).attr('id');
+    $.post('get_survey.php', data, function (resp) {
+        $('#page_content').html(resp);
+        console.log(resp);
+    });
 });

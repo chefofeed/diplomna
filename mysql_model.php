@@ -62,22 +62,40 @@ class Mysql_model {
 
     public function getById($id) {
         try {
-            $stmt = $this->conn->prepare("SELECT * FROM tbl_users WHERE userID=:userID");
+            $query = "SELECT * FROM " . $this->table . " WHERE userID=:userID";
+            $stmt = $this->conn->prepare($query);
             $stmt->bindparam(":userID", $id);
             $stmt->execute();
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
             return $row;
-        } 
-        catch (PDOException $ex) {
+        } catch (PDOException $ex) {
             echo $ex->getMessage();
-            
         }
     }
-    
 
     public function listData($criteria) {
-   
+        if (is_array($criteria)) {
+            $query = "SELECT * FROM " . $this->table . " WHERE";
+            foreach ($criteria as $key => $value) {
+                $query.=" ".$key ."= :" . $key . " AND";
+            }
+            $query=  rtrim($query,"AND");
+            error_log($query);
+            try {
+                $stmt = $this->conn->prepare($query);
+                foreach ($criteria as $key => $value) {
+                 $stmt->bindparam(":".$key, $value);   
+                }
+                
+                $stmt->execute();
+                $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                return $row;
+            } catch (PDOException $ex) {
+                echo $ex->getMessage();
+            }
+        }
     }
 
     /////////////////////////////////////////////////
@@ -86,6 +104,7 @@ class Mysql_model {
     }
 
     public function delete($id) {
+        //TODO
         try {
             $password = md5($upass);
             $stmt = $this->conn->prepare("INSERT INTO tbl_users(userName,userEmail,userPass,tokenCode) 

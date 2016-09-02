@@ -4,8 +4,6 @@ require_once 'mysql_model.php';
 
 class USER extends Mysql_model {
 
-//	private $conn;
-//	
     public function __construct() {
         $this->table = 'tbl_users';
 //        error_log(var_export($this->conn, true));
@@ -17,11 +15,6 @@ class USER extends Mysql_model {
         $stmt = $this->conn->prepare($sql);
         return $stmt;
     }
-
-//    public function lasdID() {
-//        $stmt = $this->conn->lastInsertId();
-//        return $stmt;
-//    }
 
     public function register($uname, $email, $upass, $code) {
         try {
@@ -103,8 +96,8 @@ class USER extends Mysql_model {
         $mail->MsgHTML($message);
         $mail->Send();
     }
-    
-    function getUser(){
+
+    function getUser() {
         return $_SESSION['userSession'];
     }
 

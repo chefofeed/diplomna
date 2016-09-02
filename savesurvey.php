@@ -12,6 +12,7 @@ $data = $_POST;
 $survey['title'] = isset($data['formtitle']) ? $data['formtitle'] : '';
 $survey['description'] = isset($data['description']) ? $data['description'] : '';
 $survey['user_id'] = $user->getUser();
+$survey['create_date'] = gmdate('Y-m-d H:i:s');
 
 $surveyModel = new Survey();
 $surveyModel->insert($survey);
@@ -20,8 +21,8 @@ $surveyId = $surveyModel->lastInsertId();
 $questionModel = new Question();
 $answerModel = new Answer();
 foreach ($data['questions'] as $key => $value) {
-    $question['text'] =$value['question'];
-    $question['type'] =isset($value['type'])? $value['type']:'';
+    $question['text'] = $value['question'];
+    $question['type'] = isset($value['type']) ? $value['type'] : '';
     $question['survey_id'] = $surveyId;
     //insert question
     $questionModel->insert($question);
@@ -29,7 +30,7 @@ foreach ($data['questions'] as $key => $value) {
     foreach ($data['questions'][$key]['answers'] as $k => $v) {
         $answer['text'] = $v;
         $answer['question_id'] = $questionId;
-        $answer['user_id'] = '';
+        $answer['survey_id'] = $surveyId;
         $answerModel->insert($answer);
     }
 
