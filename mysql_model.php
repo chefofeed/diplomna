@@ -1,6 +1,8 @@
 <?php
 
 require_once 'dbconfig.php';
+require_once 'class.user.php';
+
 
 class Mysql_model {
 
@@ -62,9 +64,9 @@ class Mysql_model {
 
     public function getById($id) {
         try {
-            $query = "SELECT * FROM " . $this->table . " WHERE userID=:userID";
+            $query = "SELECT * FROM " . $this->table . " WHERE id = :id";
             $stmt = $this->conn->prepare($query);
-            $stmt->bindparam(":userID", $id);
+            $stmt->bindparam(":id", $id);
             $stmt->execute();
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -78,14 +80,14 @@ class Mysql_model {
         if (is_array($criteria)) {
             $query = "SELECT * FROM " . $this->table . " WHERE";
             foreach ($criteria as $key => $value) {
-                $query.=" ".$key ."= :" . $key . " AND";
+                $query.=" ".$key ." = :" . $key . " AND";
             }
             $query=  rtrim($query,"AND");
             error_log($query);
             try {
                 $stmt = $this->conn->prepare($query);
-                foreach ($criteria as $key => $value) {
-                 $stmt->bindparam(":".$key, $value);   
+                foreach ($criteria as $key => &$value) {
+                    $stmt->bindparam(":".$key, $value);   
                 }
                 
                 $stmt->execute();
@@ -98,7 +100,6 @@ class Mysql_model {
         }
     }
 
-    /////////////////////////////////////////////////
     public function update() {
         
     }

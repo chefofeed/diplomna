@@ -1,5 +1,6 @@
 <?php
 
+//date_default_timezone_set('Europe/Sofia');
 require_once 'survey_model.php';
 require_once 'question_model.php';
 require_once 'answer_model.php';
@@ -13,6 +14,7 @@ $survey['title'] = isset($data['formtitle']) ? $data['formtitle'] : '';
 $survey['description'] = isset($data['description']) ? $data['description'] : '';
 $survey['user_id'] = $user->getUser();
 $survey['create_date'] = gmdate('Y-m-d H:i:s');
+
 
 $surveyModel = new Survey();
 $surveyModel->insert($survey);
@@ -35,6 +37,6 @@ foreach ($data['questions'] as $key => $value) {
     }
 
 //    error_log($_SESSION['userSession']);
-
+    
     echo json_encode($data);
 }

@@ -18,9 +18,9 @@ if (!$user_home->is_logged_in()) {
 }
 $survey = new Survey();
 $surveys = $survey->listData(array('user_id' => $user_home->getUser()));
-$blank = array('title'=>'BLANK', 'description'=>'Create blank survey', 'create_date'=>'today', 'id'=>'blank');
+$blank = array('title' => 'BLANK', 'description' => 'Create blank survey', 'create_date' => 'today', 'id' => 'blank');
 $surveys[] = $blank;
-error_log(var_export($surveys, true));
+
 $stmt = $user_home->runQuery("SELECT * FROM tbl_users WHERE userID=:uid");
 $stmt->execute(array(":uid" => $_SESSION['userSession']));
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -51,7 +51,7 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
                     <span class="icon-bar"></span>
                 </a>
 
-                <a class="brand" href="#"> HOME</a>
+                <a class="brand" href="home.php"> HOME</a>
                 <div class="nav-collapse collapse">
                     Split button 
                     <div class="btn-group">
@@ -76,17 +76,7 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
                         <li><a href="#">Delete poll</a></li>
                     </ul>
                 </div>
-                <div class="btn-group">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        Poll options
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="#">Add question</a></li>
-                        <li><a href="#">Choose question</a></li>
-
-                    </ul>
-                </div>
+                
                 <div class="btn-group">
                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         All polls
@@ -152,31 +142,33 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
                                 echo "<div class =row>";
                                 $openTag++;
                             }
-                            $panel ='<div class="col-md-3">
+                            $panel = '<div class="col-md-3">
                                 <div class="panel ';
-                             $panel .= $value['title'] == 'BLANK'?'panel-primary blank':'panel-success survey';
-                             $panel .= '" id="'.$value['id'].'">
+                            $panel .= $value['title'] == 'BLANK' ? 'panel-primary blank' : 'panel-success survey';
+                            $panel .= '" id="' . $value['id'] . '">
                                 <div class="panel-heading">' .
-                            $value['title']
-                            . '</div>
+                                    $value['title']
+                                    . '</div>
                                 <div class="panel-body">' .
-                            $value ['description']
-                            . '</div>
+                                    $value ['description']
+                                    . '</div>
                                 <div class="panel-footer">
                                     Created on: ' . $value['create_date'] .
-                            '</div>
+                                    '</div>
                                 </div>
                             </div>';
-                            echo $panel; 
+                            echo $panel;
                             if ($key % 4 == 3) {
                                 echo "</div>";
                                 $closeTag++;
                             }
                         }
-                        if($openTag > $closeTag){
-                             echo "</div>";
+                        if ($openTag > $closeTag) {
+                            echo "</div>";
                         }
+                        
                         ?>
+
                     </div>
                 </div>
             </div>

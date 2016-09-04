@@ -19,7 +19,7 @@ class USER extends Mysql_model {
     public function register($uname, $email, $upass, $code) {
         try {
             $password = md5($upass);
-            $stmt = $this->conn->prepare("INSERT INTO tbl_users(userName,userEmail,userPass,tokenCode) 
+            $stmt = $this->conn->prepare("INSERT INTO tbl_users(userName,userEmail,userPass,Code) 
 			                                             VALUES(:user_name, :user_mail, :user_pass, :active_code)");
             $stmt->bindparam(":user_name", $uname);
             $stmt->bindparam(":user_mail", $email);
@@ -101,4 +101,17 @@ class USER extends Mysql_model {
         return $_SESSION['userSession'];
     }
 
+    public function getUserById($id) {
+        try {
+            $query = "SELECT * FROM " . $this->table . " WHERE userID = :userID";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindparam(":userID", $id);
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $row;
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+        }
+    }
 }

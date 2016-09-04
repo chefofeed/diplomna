@@ -19,6 +19,7 @@ if(isset($_POST['btn-submit']))
 	{
 		$id = base64_encode($row['userID']);
 		$code = md5(uniqid(rand()));
+                ////////////////////////////////////////////////////token
 		
 		$stmt = $user->runQuery("UPDATE tbl_users SET tokenCode=:token WHERE userEmail=:email");
 		$stmt->execute(array(":token"=>$code,"email"=>$email));
