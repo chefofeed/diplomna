@@ -1,3 +1,8 @@
+$( document ).ready(function() {
+    console.log( "ready!" );
+    $('#tokecode').select();
+});
+
 $(function () {
     // Side Bar Toggle
     $('.hide-sidebar').click(function () {
@@ -305,14 +310,18 @@ $('body').on('click', '.ready', function () {
             break;
     }
     container.append(html);
-    console.log(html);
+//    console.log(html);
 });
 //submit button on click
 $('body').on('click','#submit-question', function () {
     var data = {};
     data['formtitle'] = $('[name="formtitle"]').val();
     data['description'] = $('[name="formdescription"]').val();
-
+    data['single_response']=$('#single_response').is(':checked') ? true: false;
+    data['edit_response']=$('#edit_response').is(':checked') ? true: false;
+    data['shuffle_question']=$('#shuffle_question').is(':checked') ? true: false;
+    console.log($('#single_response').is(':checked') ? true: false); 
+     
     data['questions'] = new Array;
     $('.question').each(function (i, el) {
         data['questions'][i] = {};
@@ -328,7 +337,7 @@ $('body').on('click','#submit-question', function () {
         });
     });
     $.post('savesurvey.php', data, function (resp) {
-        console.log(resp);
+//        console.log(resp);
         return;
     });
 });
@@ -354,7 +363,7 @@ $('body').on('click', '#blank', function () {
     
     $.post('blank.php', data, function (resp) {
         $('#page_content').html(resp);
-        console.log(resp);
+//        console.log(resp);
     });
 });
 
@@ -363,6 +372,13 @@ $('body').on('click', '.survey', function () {
     data['id'] = $(this).attr('id');
     $.post('get_survey.php', data, function (resp) {
         $('#page_content').html(resp);
-        console.log(resp);
+//        console.log(resp);
     });
 });
+
+
+$('body').on('shown.bs.modal', '#modal',function () {
+    console.log($('#tokencode'));
+    $('#tokencode').focus();
+    $('#tokencode').select();
+});  

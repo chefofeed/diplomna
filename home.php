@@ -25,6 +25,7 @@ $stmt = $user_home->runQuery("SELECT * FROM tbl_users WHERE userID=:uid");
 $stmt->execute(array(":uid" => $_SESSION['userSession']));
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 $rows = $stmt->fetch(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -40,6 +41,7 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
         <link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link  type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link type="text/css" href="assets/styles.css" rel="stylesheet" media="screen">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     </head>
     <body >
         <!--<div class="navbar navbar-defaul">-->
@@ -113,6 +115,7 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
                         <li><a href="#">Separated link</a></li>
                     </ul>
                 </div>
+                
                 <ul class="nav pull-right">
                     <li class="dropdown">
                         <a href="#" role="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> 
@@ -126,6 +129,15 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
                     </li>
                 </ul>
             </div> 
+            
+            <div
+  class="fb-like"
+  data-share="true"
+  data-width="450"
+  data-show-faces="true">
+</div>
+            
+            
             <!--            </div>       -->
             <!--        </div>        -->
             <!--/.fluid-container-->

@@ -56,6 +56,7 @@ class Mysql_model {
             $stmt->execute();
             return $stmt;
         } catch (PDOException $ex) {
+            error_log(var_export($ex,TRUE));
             echo $ex->getMessage();
         }
     }
