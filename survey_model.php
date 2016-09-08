@@ -19,11 +19,17 @@ class Survey extends Mysql_model {
 //        $stmt->bindparam(":question_id",$id);
             //$stmt->bindparam("id", $id);
             $stmt->execute();
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            error_log(var_export($row, true));
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);    
             return $row;
         } catch (PDOException $ex) {
             echo $ex->getMessage();
+        }
+    }
+    
+    public function getByToken($token){
+        $token  = $this->listData(array('token'=>$token));
+        if(isset($token[0])){
+            return $token[0];
         }
     }
 

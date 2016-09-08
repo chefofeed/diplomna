@@ -329,3 +329,16 @@ a.socialIcon:hover, .socialHoverClass {
 a {
  background-color: #D3D3D3;   
 }
+
+
+#QAsurv{
+    border-style: solid;
+    border-width: 4px;
+    border-radius: 10px;
+}
+#ftitle{
+     border-style: solid;
+    border-width: 4px;
+    border-radius: 10px;
+    
+}

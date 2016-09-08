@@ -130,12 +130,33 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
                 </ul>
             </div> 
             
+            
+            
+            <!--<script>
+                //  like i share fb button test
+                //  
+//  window.fbAsyncInit = function() {
+//    FB.init({
+//      appId      : '1753404014911806',
+//      xfbml      : true,
+//      version    : 'v2.7'
+//    });
+//  };
+//
+//  (function(d, s, id){
+//     var js, fjs = d.getElementsByTagName(s)[0];
+//     if (d.getElementById(id)) {return;}
+//     js = d.createElement(s); js.id = id;
+//     js.src = "//connect.facebook.net/en_US/sdk.js";
+//     fjs.parentNode.insertBefore(js, fjs);
+//   }(document, 'script', 'facebook-jssdk'));
+      //</script>
             <div
   class="fb-like"
   data-share="true"
   data-width="450"
   data-show-faces="true">
-</div>
+</div>-->
             
             
             <!--            </div>       -->
@@ -189,5 +210,4 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="assets/scripts.js"></script>
 
-    </body>
-</html>
+ 

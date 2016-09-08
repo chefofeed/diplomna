@@ -136,10 +136,10 @@ $('body').on('click', '.remove_option', function () {
 });
 
 $('body').on('mouseenter', '.question', function () {
-    $(this).css("border", "2px");
-    $(this).css("border", "solid");
-    $(this).css("border-color", "blue");
-    $(this).css("border-radius", "8px");
+    $(this).css("border", "3px");
+    $(this).css("border", "double");
+    $(this).css("border-color", "red");
+    $(this).css("border-radius", "10px");
 });
 
 $('body').on('mouseleave', '.question', function () {
@@ -320,7 +320,7 @@ $('body').on('click','#submit-question', function () {
     data['single_response']=$('#single_response').is(':checked') ? true: false;
     data['edit_response']=$('#edit_response').is(':checked') ? true: false;
     data['shuffle_question']=$('#shuffle_question').is(':checked') ? true: false;
-    console.log($('#single_response').is(':checked') ? true: false); 
+    console.log(data); 
      
     data['questions'] = new Array;
     $('.question').each(function (i, el) {
@@ -382,3 +382,11 @@ $('body').on('shown.bs.modal', '#modal',function () {
     $('#tokencode').focus();
     $('#tokencode').select();
 });  
+$('body').on('click', '#submit-vote', function () {
+    var data = {};
+    data['id'] = $(this).attr('id');
+    $.post('save_vote.php', data, function (resp) {
+//        $('#page_content').html(resp);
+//        console.log(resp);
+    });
+})
