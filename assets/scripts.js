@@ -383,10 +383,32 @@ $('body').on('shown.bs.modal', '#modal',function () {
     $('#tokencode').select();
 });  
 $('body').on('click', '#submit-vote', function () {
-    var data = {};
-    data['id'] = $(this).attr('id');
-    $.post('save_vote.php', data, function (resp) {
-//        $('#page_content').html(resp);
+ var data = {};
+data['questions'] = new Array;
+    $('.question').each(function (i, el) {
+    switch (type) {
+           case 'text':
+       value = $("#textvote").val();
+        console.log(value);        
+     break;
+        case 'textarea':
+           	value = $("#area_vote").val();
+         console.log(value);
+
+           break;           
+           //radio -- text
+           //checkbox -- text
+           //list --text
+    }
+        });
+//        $('input[name="vote_check"]:checked').each(function() {
+//   console.log(this.value);
+});
+    
+     
+
+    //$.post('save_vote.php', data, function (resp) {
+     //   $('#page_content').html(resp);
 //        console.log(resp);
-    });
-})
+    
+

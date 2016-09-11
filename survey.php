@@ -27,7 +27,7 @@ $surveyData = $survey->getByToken($token);
 //error_log(var_export($surveyData, true));
 //error_log(var_export($token, true));
 $questionData = $question->listData(array('survey_id' => $surveyData['id']));
-if($questionData['shuffle_question']){
+if( $questionData['shuffle_question'] ){
     shuffle($questionData);
 }
 //error_log(var_export($questionData, true));
@@ -74,14 +74,14 @@ foreach ($questionData as $key => $value) {
                                 if ($question['type'] == 'text') {
                                     $qa_content = '<div class="form-group"><div class="form-group text">
                                             <div><span class="glyphicon glyphicon-question-sign"></span> '.$question['text'].' </div></div>
-                                            <input  type = "text" class="form-control"  placeholder =" add some text" disabled="disabled">
+                                            <input  type = "text"  id="textvote" class="form-control"  placeholder ="Type your answer here" >
                                            </div>';
                                     
                                 }
                                 if ($question['type'] == 'textarea') {
-                                    $qa_content = '<div class="form-group">
-                                      <div><span class="glyphicon glyphicon-question-sign"></span> '.$question['text'].' </div> 
-                                             <div class="form-group textarea "></div>                                            
+                                    $qa_content = '<div class="form-group"><div class="form-group texterea">
+                                      <div><span class="glyphicon glyphicon-question-sign"></span> '.$question['text'].' </div></div> 
+                                           <textarea class="form-control" id="area_vote" rows="3" placeholder="Type your answer here" ></textarea>                                            
                                         </div>';
                                    
                                 }
@@ -106,7 +106,7 @@ foreach ($questionData as $key => $value) {
                                             $qa_content .='<div class="form-group">
                                             <div class="checkbox"> 
                                             <label>';
-                                            $qa_content .= '<input type="checkbox" >' . $answer['text'] . '
+                                            $qa_content .= '<input type="checkbox" name="vote_check" >' . $answer['text'] . '
                                                 </label>
                                             </div></div>';
                                         }
