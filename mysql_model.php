@@ -101,8 +101,25 @@ class Mysql_model {
         }
     }
 
-    public function update() {
-        
+    public function update($id, $data) {
+        try {
+            $query = "UPDATE " . $this->table ." SET "; //.$data. " WHERE id = :id";
+            foreach ($data as $key => $val) {
+                $query .= $key.'='.':'.$key;
+            }
+            $query .= 'WHERE id = :id';
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindparam(":id", $id);
+            foreach ($data as $key => $value) {
+                 $stmt->bindparam(":".$key, $value);
+            }
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $row;
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+        }
     }
 
     public function delete($id) {

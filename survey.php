@@ -27,7 +27,7 @@ $surveyData = $survey->getByToken($token);
 //error_log(var_export($surveyData, true));
 //error_log(var_export($token, true));
 $questionData = $question->listData(array('survey_id' => $surveyData['id']));
-if( $questionData['shuffle_question'] ){
+if( $surveyData['shuffle_question'] ){
     shuffle($questionData);
 }
 //error_log(var_export($questionData, true));
@@ -59,29 +59,29 @@ foreach ($questionData as $key => $value) {
                     <div class="panel-heading">
                         Basic Form Elements
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body fvote">
                         <div class="alert alert-info" id="ftitle"><h5><?php echo $surveyData['title'] ?></h5></div>
                         <div class="well"> <small><?php echo $surveyData['description'] ?></small></div>
 
 
-                        <form>
-
+                        <form id="myForm">
+                                
                             <?php
                            
                             //error_log(var_export($questionData, true));
                             foreach ($questionData as $key => $question) {
-                                 $qa_content = '';
+                                $qa_content = '<div class="question_vote" id="'.$question['id'].'" type="'.$question['type'].'">';
                                 if ($question['type'] == 'text') {
-                                    $qa_content = '<div class="form-group"><div class="form-group text">
+                                    $qa_content .= '<div class="form-group"><div class="form-group text">
                                             <div><span class="glyphicon glyphicon-question-sign"></span> '.$question['text'].' </div></div>
-                                            <input  type = "text"  id="textvote" class="form-control"  placeholder ="Type your answer here" >
+                                            <input  type = "text"   class="form-control"  placeholder ="Type your answer here" >
                                            </div>';
                                     
                                 }
                                 if ($question['type'] == 'textarea') {
-                                    $qa_content = '<div class="form-group"><div class="form-group texterea">
+                                    $qa_content .= '<div class="form-group"><div class="form-group texterea">
                                       <div><span class="glyphicon glyphicon-question-sign"></span> '.$question['text'].' </div></div> 
-                                           <textarea class="form-control" id="area_vote" rows="3" placeholder="Type your answer here" ></textarea>                                            
+                                           <textarea class="form-control"  rows="3" placeholder="Type your answer here" ></textarea>                                            
                                         </div>';
                                    
                                 }
@@ -93,7 +93,7 @@ foreach ($questionData as $key => $value) {
                                         $qa_content .='<div class="form-group">
                                             <div class="radio">
                                                 <label>';
-                                            $qa_content .= '<input type="radio" name="optionsRadios" id="optionsRadios1">' . $answer['text'] . '
+                                            $qa_content .= '<input type="radio" name="optionsRadio" id="'.$answer['id'].'"><span>' . $answer['text'] . '</span>
                                                </label>
                                             </div></div>';
                                             
@@ -101,12 +101,12 @@ foreach ($questionData as $key => $value) {
                                         break;
                                     case 'checkbox':
 
-                                        $qa_content = '<div><span class="glyphicon glyphicon-question-sign"></span> '.$question['text'].' </div>';
+                                        $qa_content .= '<div><span class="glyphicon glyphicon-question-sign"></span> '.$question['text'].' </div>';
                                         foreach ($answerData[$key] as $k => $answer) {
                                             $qa_content .='<div class="form-group">
                                             <div class="checkbox"> 
                                             <label>';
-                                            $qa_content .= '<input type="checkbox" name="vote_check" >' . $answer['text'] . '
+                                            $qa_content .= '<input id="'.$answer['id'].'" type="checkbox" name="vote_check" >' . $answer['text'] . '
                                                 </label>
                                             </div></div>';
                                         }
@@ -117,7 +117,7 @@ foreach ($questionData as $key => $value) {
                                         $qa_content .= '<div class="form-group">
                                             <div class="list">
                                                 <div><span class="glyphicon glyphicon-question-sign"></span> '.$question['text'].' </div></div>
-                                                <select class="form-control">';
+                                                <select class="form-control" >';
                                         
                                         foreach ($answerData[$key] as $k => $answer) {
                                             $qa_content .= '<option value="' . $answer['id'] . '">' . $answer['text'] . "</option>";
@@ -126,6 +126,7 @@ foreach ($questionData as $key => $value) {
          
                                         break;
                                 }
+                                $qa_content .= '</div>';
                                 echo $qa_content;
                                 error_log(var_export($qa_content,true));
                             }

@@ -383,32 +383,40 @@ $('body').on('shown.bs.modal', '#modal',function () {
     $('#tokencode').select();
 });  
 $('body').on('click', '#submit-vote', function () {
- var data = {};
-data['questions'] = new Array;
-    $('.question').each(function (i, el) {
-    switch (type) {
-           case 'text':
-       value = $("#textvote").val();
-        console.log(value);        
-     break;
+    var data = {};
+    data['questions'] = new Array;
+    $('.question_vote').each (function(ind, el){
+    var question = {};
+        question['type'] = $(this).attr('type');
+        switch ($(this).attr('type')) {
+             case'text':
+                question['text'] = $('input[type="text"]', this).val();
+            break;
+        case 'checkbox':
+            var ids = new Array;
+            $('input[type="checkbox"]:checked', this).each(function(){
+                ids.push($(this).attr('id'));
+            });
+            question['id'] = ids;
+            break;
         case 'textarea':
-           	value = $("#area_vote").val();
-         console.log(value);
+            question['text'] = $('textarea', this).val();
+            break;
+        case 'radio': 
+            question['id'] = $('input[type="radio"]:checked', this).attr('id');
+            break;
+        case 'hidden':
+            question['id'] = $('select', this).val();  
+            break;
+    
+        }
+        data['questions'][ind] = question;
+    });
+    $.post('save_vote.php', data, function (resp) {
+      //$('#page_content').html(resp);
+      console.log(resp);
 
-           break;           
-           //radio -- text
-           //checkbox -- text
-           //list --text
-    }
-        });
-//        $('input[name="vote_check"]:checked').each(function() {
-//   console.log(this.value);
+    });
 });
-    
-     
-
-    //$.post('save_vote.php', data, function (resp) {
-     //   $('#page_content').html(resp);
-//        console.log(resp);
-    
-
+   
+  
