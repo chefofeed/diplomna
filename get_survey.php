@@ -38,7 +38,7 @@ foreach ($questionData as $key => $value) {
         Page 1/1
     </div>
     <div class="panel-body">
-        <form id="survey">
+        <form id="survey" survey_id="<?php echo $surveyData['id']; ?>">
             <div class="form-group">
                 <input type="text" name="formtitle" placeholder="Form title" class="form-control" value="<?php echo $surveyData['title'] ?>">
             </div>
@@ -49,9 +49,10 @@ foreach ($questionData as $key => $value) {
 $qa_content = '';
 $a_content = '';
 foreach ($questionData as $key => $question) {
-    $qa_content .= '<div class="question">
+    $qa_content .= '<div class="question" id="'.$question['id'].'">
                                     <div class="row">
                                         <div class="col-lg-6">';
+    
 
     $qa_content.= "<h2>" . $question['text'] . "</h2>";
     $qa_content.= '<input type="hidden" name="htext">';
@@ -101,9 +102,25 @@ foreach ($questionData as $key => $question) {
     }
     
             $qa_content.=  '</div> 
+                 <div class="col-md-6 row-buttons">
+                        <div>
+                        <button type="button" class="btn btn-default pull-right hidden cmd-delete"  aria-label="Left Align">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </button>
+                         <button type="button" class="btn btn-default pull-right hidden cmd-duplicate" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>
+                        </button>
+                         <button type="button" class="btn btn-default pull-right hidden cmd-edit" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                        </button>
+                            </div>
+                    </div>
            </div>
        </div>';
 }
+ $qa_content.='<div class="form-group">
+                <button type="button" id="add_question"  class="btn btn-primary">Add Question</button>
+            </div>';
 echo $qa_content;
 ?>
         </form>    
@@ -150,6 +167,7 @@ echo $qa_content;
             
     			<div class="col-md-12">
                     <ul class="social-network social-circle"> 
+                        
                         <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
                         <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
                     </ul>

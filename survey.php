@@ -45,22 +45,23 @@ foreach ($questionData as $key => $value) {
         <link  type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link type="text/css" href="assets/styles.css" rel="stylesheet" media="screen">
     </head>
-    <body  class="base-body" >
+    <body  class="base-body vote-page">
 
-        <div class="jumbotron">
+
+        
         <div class="row">
-            <div class="col-lg-6 col-md-offset-3">
-                <h1 class="page-header">Forms</h1>
+            <div class="col-lg-4 col-md-offset-4" id="forms-vote-title">
+                <h1 class="page-header ">Forms</h1>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-6 col-md-offset-3">
-                <div class="panel panel-info" id="QAsurv">
+                <div class="panel panel-yellow" id="QAsurv">
                     <div class="panel-heading">
                         Basic Form Elements
                     </div>
                     <div class="panel-body fvote">
-                        <div class="alert alert-info" id="ftitle"><h5><?php echo $surveyData['title'] ?></h5></div>
+                        <div class="alert alert-info" id="ftitle" survey-id="<?php echo $surveyData['id']; ?>"><h5><?php echo $surveyData['title'] ?></h5></div>
                         <div class="well"> <small><?php echo $surveyData['description'] ?></small></div>
 
 
@@ -73,14 +74,14 @@ foreach ($questionData as $key => $value) {
                                 $qa_content = '<div class="question_vote" id="'.$question['id'].'" type="'.$question['type'].'">';
                                 if ($question['type'] == 'text') {
                                     $qa_content .= '<div class="form-group"><div class="form-group text">
-                                            <div><span class="glyphicon glyphicon-question-sign"></span> '.$question['text'].' </div></div>
+                                            <div class="panel panel-primary"><span class="glyphicon glyphicon-question-sign"></span> '.$question['text'].' </div></div>
                                             <input  type = "text"   class="form-control"  placeholder ="Type your answer here" >
                                            </div>';
                                     
                                 }
                                 if ($question['type'] == 'textarea') {
                                     $qa_content .= '<div class="form-group"><div class="form-group texterea">
-                                      <div><span class="glyphicon glyphicon-question-sign"></span> '.$question['text'].' </div></div> 
+                                      <div class="panel panel-primary"><span class="glyphicon glyphicon-question-sign"></span> '.$question['text'].' </div></div> 
                                            <textarea class="form-control"  rows="3" placeholder="Type your answer here" ></textarea>                                            
                                         </div>';
                                    
@@ -88,7 +89,7 @@ foreach ($questionData as $key => $value) {
 
                                 switch ($question['type']) {
                                     case 'radio':
-                                        $qa_content .= '<div><span class="glyphicon glyphicon-question-sign"></span> '.$question['text'].' </div>';
+                                        $qa_content .= '<div class="panel panel-primary"><span class="glyphicon glyphicon-question-sign"></span> '.$question['text'].' </div>';
                                         foreach ($answerData[$key] as $k => $answer) {
                                         $qa_content .='<div class="form-group">
                                             <div class="radio">
@@ -101,7 +102,7 @@ foreach ($questionData as $key => $value) {
                                         break;
                                     case 'checkbox':
 
-                                        $qa_content .= '<div><span class="glyphicon glyphicon-question-sign"></span> '.$question['text'].' </div>';
+                                        $qa_content .= '<div class="panel panel-primary"><span class="glyphicon glyphicon-question-sign"></span> '.$question['text'].' </div>';
                                         foreach ($answerData[$key] as $k => $answer) {
                                             $qa_content .='<div class="form-group">
                                             <div class="checkbox"> 
@@ -116,7 +117,7 @@ foreach ($questionData as $key => $value) {
   
                                         $qa_content .= '<div class="form-group">
                                             <div class="list">
-                                                <div><span class="glyphicon glyphicon-question-sign"></span> '.$question['text'].' </div></div>
+                                                <div class="panel panel-primary"><span class="glyphicon glyphicon-question-sign"></span> '.$question['text'].' </div></div>
                                                 <select class="form-control" >';
                                         
                                         foreach ($answerData[$key] as $k => $answer) {
@@ -128,7 +129,6 @@ foreach ($questionData as $key => $value) {
                                 }
                                 $qa_content .= '</div>';
                                 echo $qa_content;
-                                error_log(var_export($qa_content,true));
                             }
                             ?>
 
@@ -138,7 +138,7 @@ foreach ($questionData as $key => $value) {
                 </div>               
             </div>
         </div>
-        </div>
+        
 
 
 

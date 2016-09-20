@@ -140,11 +140,13 @@ $('body').on('mouseenter', '.question', function () {
     $(this).css("border", "double");
     $(this).css("border-color", "red");
     $(this).css("border-radius", "10px");
+    $('.row-buttons button', this).removeClass('hidden');
 });
 
 $('body').on('mouseleave', '.question', function () {
     $(this).css("border", "0px");
     $(this).css("border", "none");
+    $('.row-buttons button', this).addClass('hidden');
 });
 
 $('body').on('click', '.question .option', function () {
@@ -385,8 +387,12 @@ $('body').on('shown.bs.modal', '#modal',function () {
 $('body').on('click', '#submit-vote', function () {
     var data = {};
     data['questions'] = new Array;
+    console.log($('#ftitle'));
+    console.log($('#ftitle').attr('survey-id'));
+    data['survey-id']= $('#ftitle').attr('survey-id');
     $('.question_vote').each (function(ind, el){
     var question = {};
+        question['qid']=$(this).attr('id');
         question['type'] = $(this).attr('type');
         switch ($(this).attr('type')) {
              case'text':
@@ -408,10 +414,14 @@ $('body').on('click', '#submit-vote', function () {
         case 'hidden':
             question['id'] = $('select', this).val();  
             break;
-    
+//    //$("#yourdropdownid").change(function() {
+//    console.log($("option:selected", this).text()); //text
+//    console.log($(this).val()); //value
+//})
         }
         data['questions'][ind] = question;
     });
+    console.log(data);
     $.post('save_vote.php', data, function (resp) {
       //$('#page_content').html(resp);
       console.log(resp);
@@ -419,4 +429,36 @@ $('body').on('click', '#submit-vote', function () {
     });
 });
    
-  
+$('body').on('click', '.cmd-edit', function () {
+    $('.question .option').click();
+});
+
+$('body').on('click', '.cmd-duplicate', function () {
+    var copy = $(this).parents('.question').clone();
+     $(this).parents('.question').after(copy);
+});
+$('body').on('click', '.cmd-delete', function () {
+    var data = {}; 
+    data['question-id']= $(this).parents('.question').attr('id');
+    data['survey-id']= $('#survey').attr('survey_id');
+    console.log(data);
+    var question = this;
+    $.post('delete-question.php', data, function (resp) {
+        console.log(resp);
+        console.log(resp['success']);
+        if(resp['success'] == true){
+            console.log('del');
+            $(question).parents('.question').remove();
+        }
+    }, 'json');  
+});
+
+$('body').on('click', '.show-chart', function () {
+    $(this).parents('.switchable').find('.question-chart').removeClass('hidden');
+    $(this).parents('.question-table').addClass('hidden');
+});
+
+$('body').on('click', '.show-table', function () {
+    $(this).parents('.switchable').find('.question-chart').addClass('hidden');
+    $(this).parents('.switchable').find('.question-table').removeClass('hidden');
+});

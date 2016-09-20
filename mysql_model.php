@@ -84,7 +84,6 @@ class Mysql_model {
                 $query.=" ".$key ." = :" . $key . " AND";
             }
             $query=  rtrim($query,"AND");
-            error_log($query);
             try {
                 $stmt = $this->conn->prepare($query);
                 foreach ($criteria as $key => &$value) {
@@ -122,20 +121,16 @@ class Mysql_model {
         }
     }
 
-    public function delete($id) {
-        //TODO
+    public function delete($id) {   
         try {
-            $password = md5($upass);
-            $stmt = $this->conn->prepare("INSERT INTO tbl_users(userName,userEmail,userPass,tokenCode) 
-			                                             VALUES(:user_name, :user_mail, :user_pass, :active_code)");
-            $stmt->bindparam(":user_name", $uname);
-            $stmt->bindparam(":user_mail", $email);
-            $stmt->bindparam(":user_pass", $password);
-            $stmt->bindparam(":active_code", $code);
-            $stmt->execute();
-            return $stmt;
+          $query = "DELETE FROM " . $this->table ." WHERE id=:id";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindparam(":id", $id);
+            $row = $stmt->execute();
+ 
+            return $row;
         } catch (PDOException $ex) {
-            echo $ex->getMessage();
+            echo json_encode(array('message'=>$ex->getMessage(), 'success'=>false));
         }
     }
 

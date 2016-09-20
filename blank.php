@@ -13,7 +13,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 $rows = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 
-<div class="panel panel-info">
+<div class="panel panel-danger">
     <div class="panel-heading">
         Page 1/1
     </div>
@@ -39,6 +39,19 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
                             <input type="text" class="form-control" aria-label="..."class="form-control answer" value="Option 1">
                         </div>  
                     </div> 
+                    <div class="col-md-6 row-buttons">
+                        <div>
+                        <button type="button" class="btn btn-default pull-right hidden cmd-delete"  aria-label="Left Align">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </button>
+                         <button type="button" class="btn btn-default pull-right hidden cmd-duplicate" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>
+                        </button>
+                         <button type="button" class="btn btn-default pull-right hidden cmd-edit" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                        </button>
+                            </div>
+                    </div>
                 </div>
             </div>
             <div class="form-group">
