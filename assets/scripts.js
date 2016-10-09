@@ -479,14 +479,19 @@ $('body').on('click', '.show-table', function () {
 $('body').on('click', '.delete-poll', function () {
     var data = {}; 
     if($('.survey.selected').length > 0){
-        data['survey-id'] = $('.survey.selected').attr('id');
+        data['question-id']= $(this).parents('.question').attr('id');
+        data['survey-id'] = $('.survey.selected').attr('id');  
     }
     else{
         return;
     }
     $.post('delete-form.php', data, function (resp) {
        console.log(resp);
-    });
+       if(resp['success'] != undefined ){
+           console.log('test');
+           $('.survey.selected').parent('div').remove();
+       }
+    }, 'json');
 });
 
 /////SHOW RESULTS//////

@@ -119,5 +119,18 @@ where user_answers.user_id =:userID and answers.survey_id =:survey_id and answer
             echo $ex->getMessage();
         }
     }
+    public function deleteAnswersForSurvey($uid, $surveyId) {
+        try {
+            //select * from user_answers where user_id=1 and  answer_id =63;
+            $stmt = $this->conn->prepare("DELETE FROM user_answers WHERE user_id=:user_id and  answer_id IN (SELECT id FROM answers where survey_id = :survey_id)");
+            $stmt->bindparam(":user_id", $uid);   
+            $stmt->bindparam(":survey_id", $surveyId);
+            $stmt->execute();
+            //$row = $stmt->fetch(PDO::FETCH_ASSOC);
+           // return $row;
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+        }
+    }
 
 }

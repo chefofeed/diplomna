@@ -354,20 +354,7 @@ a {
     height: 35px;
     background-color: #cccccc;
 }
-/*.well small{
-    text-align-left: center;
-    vertical-align: middle;
-    position: absolute;
-    top: 22%;
-    left: 5%;
-}
-#ftitle h5{
-    text-align-left: center;
-    vertical-align: middle;
-    position: absolute;
-    top: 10%;
-    left: 5%;
-}*/
+
 
 .page-header{
     text-align: center;
@@ -386,32 +373,32 @@ a {
 #forms-vote-title h1{
     border-bottom: 1px solid #333333;   
 }
-.panel-yellow > .panel-heading {
+/*.panel-yellow > .panel-heading {
     border-color: #f0ad4e;
     color: white;
     background-color: #f0ad4e;
-}
+}*/
 .body-style{
-   background-color:#009999; 
+    background-color:#009999; 
 }
 .question-table{
     padding-left: 30px;
 }
 .question-chart{
-margin-left: 215px;
- 
+    padding-left: 30px;
+
 }
 .panel-green {
     border-color:#00cc66;
 }
-.panel-green > .panel-heading {
+/*.panel-green > .panel-heading {
     border-color: #009900;
     color: white;
     background-color:#009900;
-}
+}*/
 .selected{
-border-color: blue;
-border-width: 3px;
+    border-color: blue;
+    border-width: 3px;
 }
 
 .loader{

@@ -90,13 +90,13 @@ foreach ($questionData as $key => $value) {
                                 foreach ($questionData as $key => $value) {
                                     if ($value['type'] == 'radio' || $value['type'] == 'checkbox' || $value['type'] == 'hidden') {
                                         echo '<div class="switchable row">';
-                                        echo '<div class="panel panel-primary question-chart hidden col-md-8 col-md-offset-2">
-                                                <div class="panel-heading"><button class="btn btn-default show-table pull-right">Show Table</button></div><div class="panel-body"><div id="chart_div' . $value['id'] . '""></div></div></div>';
+                                        echo '<div class="question-chart hidden col-md-12"><div class="panel panel-primary">
+                                                <div class="panel-heading"><div class="pull-right"><button class="btn btn-default show-table">Show Table</button></div><div class="clearfix"></div></div><div class="panel-body"><div id="chart_div' . $value['id'] . '""></div></div></div></div>';
                                         $html = '
-                                    <div class="col-md-12 question-table">
+                                    <div class="col-md-12 question-table ">
                                         <div class="panel panel-primary">
-                                            <div class="panel-heading">'
-                                                .$value['text'].'<button class="btn btn-default show-chart pull-right">Show Chart</button>'
+                                            <div class="panel-heading"><div class="pull-left">'
+                                                .$value['text'].'</div><div class="pull-right"><button class="btn btn-default show-chart ">Show Chart</button></div><div class="clearfix"></div>'
                                            .' </div>
                                             <!-- /.panel-heading -->
                                             <div class="panel-body">

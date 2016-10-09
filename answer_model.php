@@ -60,5 +60,18 @@ class Answer extends Mysql_model {
             echo $ex->getMessage();
         }
     }
+    
+    public function deleteAnswersForSurvey($sid) {
+      try {
+          $query = "DELETE FROM " . $this->table . " WHERE survey_id=:survey_id";
+          $stmt = $this->conn->prepare($query);
+          $stmt->bindparam(":survey_id", $sid);
+          $row = $stmt->execute();
+
+          return $row;
+      } catch (PDOException $ex) {
+          echo $ex->getMessage();
+      }
+    }
 
 }

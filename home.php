@@ -46,7 +46,7 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
         <div>
         <!--<div class="navbar navbar-defaul">-->
         <!--            <div class="navbar-inner">-->
-        <nav class="navbar navbar-inverse">
+        <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
                 <a class="brand" href="home.php"> HOME</a>
 
