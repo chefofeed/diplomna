@@ -4,7 +4,7 @@ require_once 'survey_model.php';
 require_once 'question_model.php';
 require_once 'answer_model.php';
 
-$id = isset($_POST['id']) ? $_POST['id'] : 72;
+$id = isset($_POST['id']) ? $_POST['id'] : 72;//////////////////////////////id
 
 $survey = new Survey();
 $question = new Question();
@@ -16,7 +16,7 @@ $answerData = array();
 foreach ($questionData as $key => $value) {
     $answerData[$value['id']] = $answer->listData(array('question_id' => $value['id'], 'survey_id' => $id));
 }
-error_log(var_export($answerData, true));
+//error_log(var_export($answerData, true));
 ?>
 <html>
     <head>
@@ -46,7 +46,7 @@ foreach ($questionData as $key => $value) {
                             data.addColumn('number', 'Count');";
         $data = array();
         foreach ($answerData[$value['id']] as $key => $ans) {
-            error_log($ans['text']);
+            //error_log($ans['text']);
             if (isset($ans['text'])) {
                 $data[] = [$ans['text'], isset($ans['count']) ? intval($ans['count']) : 0];
             }
@@ -71,30 +71,30 @@ foreach ($questionData as $key => $value) {
     </head>
     <body  class="base-body" >
             <div class="row">
-                <div class="col-lg-8 col-md-offset-2">
+                <div class="col-md-8 col-md-offset-2">
                     <h1 class="page-header">Results</h1>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-8 col-md-offset-2">
-                    <div class="panel panel-Success" >
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="panel panel-green" >
                         <div class="panel-heading">
                             Results
                         </div>
 
                         <div class="panel-body ">
 
-                            <form >
+                            
 
                                 <?php
                                 foreach ($questionData as $key => $value) {
                                     if ($value['type'] == 'radio' || $value['type'] == 'checkbox' || $value['type'] == 'hidden') {
                                         echo '<div class="switchable row">';
-                                        echo '<div class="panel panel-default question-chart hidden col-md-12">
+                                        echo '<div class="panel panel-primary question-chart hidden col-md-8 col-md-offset-2">
                                                 <div class="panel-heading"><button class="btn btn-default show-table pull-right">Show Table</button></div><div class="panel-body"><div id="chart_div' . $value['id'] . '""></div></div></div>';
                                         $html = '
-                                    <div class="col-lg-12 question-table">
-                                        <div class="panel panel-default">
+                                    <div class="col-md-12 question-table">
+                                        <div class="panel panel-primary">
                                             <div class="panel-heading">'
                                                 .$value['text'].'<button class="btn btn-default show-chart pull-right">Show Chart</button>'
                                            .' </div>
@@ -140,8 +140,6 @@ foreach ($questionData as $key => $value) {
                                     }
                                 }
                                 ?>
-
-                            </form>
 
                         </div>
                     </div>               

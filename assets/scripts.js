@@ -21,25 +21,7 @@ $(function () {
         $('.hide-sidebar').show();
         $('#sidebar').show('fast');
     });
-//});S
-//$(document).ready(function() {
-// // executes when HTML-Document is loaded and DOM is ready
-// $('#pol').click(function () {
-//    console.log("success");
-//    $.get("html/poll.php", function (data) {
-//        $(".poll_body").html(data);
-//        alert("Load was performed.");
-//    });
-//    
-//});
-// alert("document is ready");
 });
-
-//function myFunction() {
-//    var x = document.getElementById("mySelect").value;
-//    document.getElementById("demo").innerHTML = "You selected: " + x;
-//}
-
 
 $('body').on('change', '#Selector', function () {
     var html = '';
@@ -192,7 +174,7 @@ $('body').on('click', '.question .option', function () {
                     $('#content').append('<div class="row"><div class="col-lg-6">' +
                             '<div class="input-group"><span class="input-group-addon">' +
                             '<input type="radio" aria-label="..."  class="type" name="optionsRadios" id="optionsRadios1" disabled="disabled"></span>' +
-                            '<input type="text" class="form-control answer" aria-label="..." value="" >' +
+                            '<input type="text" class="form-control answer" answer-id="'+$(el).find('input[type="text"]').attr('answer-id')+'" aria-label="..." value="" >' +
                             '</div></div></div>');
                     $('#content input[type="text"]').last().val($(el).find('input[type="text"]').val());
                     break;
@@ -203,7 +185,7 @@ $('body').on('click', '.question .option', function () {
                     $('#content').append('<div class="row"><div class="col-lg-6">' +
                             '<div class="input-group"><span class="input-group-addon">' +
                             '<input type="hidden" aria-label="..." class="type" name="optionsRadios" id="optionsRadios1" disabled="disabled"></span>' +
-                            '<input type="text" class="form-control answer" aria-label="..." value="" >' +
+                            '<input type="text" class="form-control answer" answer-id="'+$(el).find('input[type="text"]').attr('answer-id')+'" aria-label="..." value="" >' +
                             '</div></div></div>');
                     $('#content input[type="text"]').last().val($(el).find('input[type="text"]').val());
                     break;
@@ -212,7 +194,7 @@ $('body').on('click', '.question .option', function () {
                 {
                     $('#Selector').val(2);
                     $('#content').append('<div class="row"><div class="col-lg-6"><div class="form-group">' +
-                            '<input type="text" class="form-control answer" aria-label="..." value="Add your text here!" disabled="disabled">' +
+                            '<input type="text" class="form-control answer"  aria-label="..." value="Add your text here!" disabled="disabled">' +
                             '</div></div></div></div>');
                     break;
                 }
@@ -230,7 +212,7 @@ $('body').on('click', '.question .option', function () {
                     $('#content').append('<div class="row"><div class="col-lg-6">' +
                             '<div class="input-group"><span class="input-group-addon">' +
                             '<input type="checkbox" aria-label="..." class="type" name="optionsRadios" id="optionsRadios1" disabled="disabled"></span>' +
-                            '<input type="text" class="form-control answer" aria-label="..." value="" >' +
+                            '<input type="text" class="form-control answer" answer-id="'+$(el).find('input[type="text"]').attr('answer-id')+'" aria-label="..." value="" >' +
                             '</div></div></div>');
                     $('#content input[type="text"]').last().val($(el).find('input[type="text"]').val());
                     break;
@@ -256,6 +238,7 @@ $('body').on('click', '.ready', function () {
     var helptext = $('[name="htext"]').val();
     var type = $('#Selector').val();
     var values = new Array();
+    var ids = new Array();
     var container = $(this).closest('.question');
     switch (type) {
         case'3':
@@ -263,6 +246,7 @@ $('body').on('click', '.ready', function () {
         case'5':
             $('#content input[type="text"]:not(".shadow")').each(function (ind, el) {
                 values.push($(el).val());
+                ids.push($(el).attr('answer-id'));
             });
             break;
     }
@@ -283,7 +267,7 @@ $('body').on('click', '.ready', function () {
                         '<div class="input-group option">' +
                         '<span class="input-group-addon">' +
                         '<input type="checkbox" aria-label="..."  class="type"name="optionsRadios" id="optionsRadios1" disabled="disabled"></span>' +
-                        '<input type="text" class="form-control answer" aria-label="..." value="' + values[i] + '" >' +
+                        '<input type="text" class="form-control answer" answer-id="'+ids[i]+'" aria-label="..." value="' + values[i] + '" >' +
                         '</div></div></div>';
             }
             break;
@@ -293,7 +277,7 @@ $('body').on('click', '.ready', function () {
                         '<div class="input-group">' +
                         '<span class="input-group-addon">' +
                         '<input  type="hidden" aria-label="..." class="type" name="optionsRadios" id="optionsRadios2" disabled="disabled"></span>' +
-                        '<input type="text" class="form-control list" aria-label="..." value="' + values[i] + '">' +
+                        '<input type="text" class="form-control list answer" answer-id="'+ids[i]+'" aria-label="..." value="' + values[i] + '">' +
                         '</div></div></div>';
 
             }
@@ -303,7 +287,7 @@ $('body').on('click', '.ready', function () {
                 html += '<div class="row"><div class="col-lg-6">' +
                         '<div class="input-group option"><span class="input-group-addon ">' +
                         '<input type="radio"  class="type" aria-label="..." name="optionsRadios" id="optionsRadios1" disabled="disabled"></span>' +
-                        '<input type="text" class="form-control answer" aria-label="..." value="' + values[i] + '" >' +
+                        '<input type="text" class="form-control answer" answer-id="'+ids[i]+'" aria-label="..." value="' + values[i] + '" >' +
                         '</div></div></div>';
             }
             break;
@@ -357,7 +341,20 @@ $('body').on('click','#add_question', function () {
             '<input type="radio" aria-label="..." class="type"></span>' +
             '<input type="text" class="form-control" aria-label="..."class="form-control answer" value="Option 1">' +
             '</div>' +
-            '</div><div></div>';
+            '</div><div></div>' +
+    '<div class="col-md-6 row-buttons">' +
+                        '<div>' +
+                        '<button type="button" class="btn btn-default pull-right hidden cmd-delete"  aria-label="Left Align">' +
+                            '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>' +
+                        '</button>' +
+                         '<button type="button" class="btn btn-default pull-right hidden cmd-duplicate" aria-label="Left Align">' +
+                            '<span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>' +
+                        '</button>' +
+                         '<button type="button" class="btn btn-default pull-right hidden cmd-edit" aria-label="Left Align">' +
+                            '<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>' +
+                        '</button>' +
+                            '</div>' +
+                    '</div>';
     $(this).before(html);
 });
 $('body').on('click', '#blank', function () {
@@ -369,9 +366,21 @@ $('body').on('click', '#blank', function () {
     });
 });
 
-$('body').on('click', '.survey', function () {
+$('body').on('dblclick', '.survey', function () {
     var data = {};
     data['id'] = $(this).attr('id');
+    $('.loader').removeClass('hidden');
+    $.post('get_survey.php', data, function (resp) {
+        $('.loader').addClass('hidden');
+        $('#page_content').html(resp);
+//        console.log(resp);
+    });
+});
+
+
+$('body').on('click', '#reload-form', function () {
+    var data = {}; 
+    data['id']= $('#survey').attr('survey_id');
     $.post('get_survey.php', data, function (resp) {
         $('#page_content').html(resp);
 //        console.log(resp);
@@ -397,6 +406,7 @@ $('body').on('click', '#submit-vote', function () {
         switch ($(this).attr('type')) {
              case'text':
                 question['text'] = $('input[type="text"]', this).val();
+                question['id'] = $('input[type="text"]',this).attr('id');
             break;
         case 'checkbox':
             var ids = new Array;
@@ -407,6 +417,7 @@ $('body').on('click', '#submit-vote', function () {
             break;
         case 'textarea':
             question['text'] = $('textarea', this).val();
+            question['id'] = $('textarea', this).attr('id');
             break;
         case 'radio': 
             question['id'] = $('input[type="radio"]:checked', this).attr('id');
@@ -414,23 +425,20 @@ $('body').on('click', '#submit-vote', function () {
         case 'hidden':
             question['id'] = $('select', this).val();  
             break;
-//    //$("#yourdropdownid").change(function() {
-//    console.log($("option:selected", this).text()); //text
-//    console.log($(this).val()); //value
-//})
         }
-        data['questions'][ind] = question;
+        data['questions'][ind] = question;  
     });
     console.log(data);
     $.post('save_vote.php', data, function (resp) {
-      //$('#page_content').html(resp);
       console.log(resp);
 
     });
 });
    
+
 $('body').on('click', '.cmd-edit', function () {
-    $('.question .option').click();
+    $(this).parents('.question').find('.option:first').click();
+    console.log( $(this).parents('.question').find('.option:first'));
 });
 
 $('body').on('click', '.cmd-duplicate', function () {
@@ -461,4 +469,107 @@ $('body').on('click', '.show-chart', function () {
 $('body').on('click', '.show-table', function () {
     $(this).parents('.switchable').find('.question-chart').addClass('hidden');
     $(this).parents('.switchable').find('.question-table').removeClass('hidden');
+});
+
+//////DELETE POLL//////
+ $('body').on('click', '.survey', function () {
+    $('.survey').removeClass('selected');
+    $(this).addClass('selected');
+});
+$('body').on('click', '.delete-poll', function () {
+    var data = {}; 
+    if($('.survey.selected').length > 0){
+        data['survey-id'] = $('.survey.selected').attr('id');
+    }
+    else{
+        return;
+    }
+    $.post('delete-form.php', data, function (resp) {
+       console.log(resp);
+    });
+});
+
+/////SHOW RESULTS//////
+$('body').on('click', '.survey', function () {
+    $('.survey').removeClass('selected');
+    $(this).addClass('selected');
+});
+$('body').on('click', '.show-results', function () {
+    if($('.survey.selected').length > 0){
+        $('input[name="id"]').val($('.survey.selected').attr('id'));
+    }
+    else{
+        return;
+    }
+    $('#result-form').submit();
+});
+//////CREATE POLL////
+$('body').on('click', '.create-poll', function () {
+  var data = {};
+     $.post('blank.php', data, function (resp) {
+        $('#page_content').html(resp);
+});
+});
+
+$('body').on('click','#send-form', function () {
+    var data = {};
+    data['formtitle'] = $('[name="formtitle"]').val();
+    data['description'] = $('[name="formdescription"]').val();
+    data['single_response']=$('#single_response').is(':checked') ? true: false;
+    data['edit_response']=$('#edit_response').is(':checked') ? true: false;
+    data['shuffle_question']=$('#shuffle_question').is(':checked') ? true: false;
+    console.log(data); 
+     
+    data['questions'] = new Array;
+    $('.question').each(function (i, el) {
+        data['questions'][i] = {};
+        data['questions'][i]['question'] = $('h2', this).html();
+        data['questions'][i]['type'] = $('.type', this).is('div.textarea') ? 'textarea' : $('.type', this).attr('type');
+        data['questions'][i]['answers'] = new Array;
+        if (data['questions'][i]['type'] == 'text') {
+            return true;
+        }
+        $('.answer').each(function (j, el) {
+            data['questions'][i]['answers'][j] = $(el).val();
+
+        });
+    });
+    $.post('savesurvey.php', data, function (resp) {
+//        console.log(resp);
+        return;
+    });
+});
+$('body').on('click','#submit-survey', function () {
+    var data = {};
+    data['survey-id']= $('#survey').attr('survey_id');
+    data['formtitle'] = $('[name="formtitle"]').val();
+    data['description'] = $('[name="formdescription"]').val();
+    data['single_response']=$('#single_response').is(':checked') ? true: false;
+    data['edit_response']=$('#edit_response').is(':checked') ? true: false;
+    data['shuffle_question']=$('#shuffle_question').is(':checked') ? true: false;
+    console.log(data); 
+   
+    data['questions'] = new Array;
+    $('.question').each(function (i, el) {
+        data['questions'][i] = {};
+        data['questions'][i]['text'] = $('h2', this).html();
+        data['questions'][i]['type'] = $('.type', this).is('div.textarea') ? 'textarea' : $('.type', this).attr('type'); //typovete da se opravi
+        data['questions'][i]['id']= $(this).attr('id');
+        data['questions'][i]['answers'] = new Array;
+        if (data['questions'][i]['type'] == 'text') {
+            return true;
+        }
+        $('.answer', this).each(function (j, el) {
+            data['questions'][i]['answers'][j] = {};
+            data['questions'][i]['answers'][j]['text']= $(el).val();
+            data['questions'][i]['answers'][j]['id'] = $(el).attr('answer-id');
+        });
+    });
+    console.log(data);
+    $('.loader').removeClass('hidden');
+    $.post('updatesurvey.php', data, function (resp) {
+        $('.loader').addClass('hidden');
+//        console.log(resp);
+        return;
+    });
 });

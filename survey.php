@@ -7,25 +7,28 @@ require_once 'class.user.php';
 require_once 'survey_model.php';
 require_once 'question_model.php';
 require_once 'answer_model.php';
+require_once 'useranswers_model.php';
 
 $user_home = new USER();
 
 $token = $_GET['token'];
-//error_log(var_export($token,true));
-$stmt = $user_home->runQuery("SELECT * FROM tbl_users WHERE userID=:uid");
-$stmt->execute(array(":uid" => $_SESSION['userSession']));
-$row = $stmt->fetch(PDO::FETCH_ASSOC);
-$rows = $stmt->fetch(PDO::FETCH_ASSOC);
-
-
-
 $survey = new Survey();
 $question = new Question();
 $answer = new Answer();
+$useranswer = new UserAnswer();
 $surveyData = $survey->getByToken($token);
-//echo var_export($surveyData,true);
-//error_log(var_export($surveyData, true));
-//error_log(var_export($token, true));
+if($surveyData['single_response'] == 1){
+    if (!$user_home->is_logged_in()) {
+        $user_home->redirect('index.php?token='.$token);
+    }
+}
+
+if ($user_home->is_logged_in()) {
+    $votes = $useranswer->getUserAnswerIdForSurvey($surveyData['id'], $user_home->getUser());
+}
+$votes = $votes === false? array(): $votes;
+///$votes = array_column($votes, 'id');
+
 $questionData = $question->listData(array('survey_id' => $surveyData['id']));
 if( $surveyData['shuffle_question'] ){
     shuffle($questionData);
@@ -37,7 +40,7 @@ foreach ($questionData as $key => $value) {
 }
 ?>
 <!--//show html/form to vote-->
-<html class="vote_survey">
+<html>
     <head>
         <title>Form to vote</title>
         <!-- Bootstrap -->
@@ -73,41 +76,84 @@ foreach ($questionData as $key => $value) {
                             foreach ($questionData as $key => $question) {
                                 $qa_content = '<div class="question_vote" id="'.$question['id'].'" type="'.$question['type'].'">';
                                 if ($question['type'] == 'text') {
+                                    if(!empty($answerData[$key]) && in_array($answerData[$key][0]['id'], $votes)){
+                                        $text = $answerData[$key][0]['text'];
+                                        $id = 'id="'.$answerData[$key][0]['id'].'"';
+                                    }
+                                    else{
+                                        $text = '';
+                                        $id = '';
+                                    }
                                     $qa_content .= '<div class="form-group"><div class="form-group text">
                                             <div class="panel panel-primary"><span class="glyphicon glyphicon-question-sign"></span> '.$question['text'].' </div></div>
-                                            <input  type = "text"   class="form-control"  placeholder ="Type your answer here" >
+                                            <input  type = "text"  '.$id.' class="form-control"   value="'.$text.'" placeholder ="Type your answer here" >
                                            </div>';
                                     
                                 }
                                 if ($question['type'] == 'textarea') {
+                                    if(!empty($answerData[$key]) && in_array($answerData[$key][0]['id'], $votes)){
+                                        $text = $answerData[$key][0]['text'];
+                                        $id = 'id="'.$answerData[$key][0]['id'].'"';
+                                    }
+                                    else{
+                                        $text = '';
+                                        $id = '';
+                                    }
                                     $qa_content .= '<div class="form-group"><div class="form-group texterea">
                                       <div class="panel panel-primary"><span class="glyphicon glyphicon-question-sign"></span> '.$question['text'].' </div></div> 
-                                           <textarea class="form-control"  rows="3" placeholder="Type your answer here" ></textarea>                                            
+                                           <textarea class="form-control"  rows="3" '.$id.' placeholder="Type your answer here" >'.$text.'</textarea>                                            
                                         </div>';
                                    
                                 }
-
+                                // if ($question['type'] == 'textarea') {
+//                                    if(!empty($answerData[$key]) && in_array($answerData[$key][0]['id'], $votes)){
+//                                        $text = $answerData[$key][0]['text'];
+//                                        $id = 'id="'.$answerData['key'][0]['id'].'"';
+//                                    }
+//                                    else{
+//                                        $text = '';
+//                                        $id = '';
+//                                    }
+//                                    $qa_content .= '<div class="form-group"><div class="form-group texterea">
+//                                      <div class="panel panel-primary"><span class="glyphicon glyphicon-question-sign"></span> '.$question['text'].' </div></div> 
+//                                           <textarea class="form-control"  rows="3" '.$id.' placeholder="Type your answer here" value="'.$text.'"></textarea>                                            
+//                                        </div>';
+//                                   
+//                                }
+////
                                 switch ($question['type']) {
                                     case 'radio':
                                         $qa_content .= '<div class="panel panel-primary"><span class="glyphicon glyphicon-question-sign"></span> '.$question['text'].' </div>';
                                         foreach ($answerData[$key] as $k => $answer) {
-                                        $qa_content .='<div class="form-group">
-                                            <div class="radio">
-                                                <label>';
-                                            $qa_content .= '<input type="radio" name="optionsRadio" id="'.$answer['id'].'"><span>' . $answer['text'] . '</span>
-                                               </label>
-                                            </div></div>';
+                                            if(in_array($answer['id'], $votes)){
+                                                $checked = 'checked="checked"';
+                                            }
+                                            else{
+                                                $checked = '';
+                                            }
+                                            $qa_content .='<div class="form-group">
+                                                <div class="radio">
+                                                    <label>';
+                                                $qa_content .= '<input type="radio" name="optionsRadio" id="'.$answer['id'].'"'.$checked.'><span>' . $answer['text'] . '</span>
+                                                   </label>
+                                                </div></div>';
                                             
                                         }
                                         break;
                                     case 'checkbox':
 
                                         $qa_content .= '<div class="panel panel-primary"><span class="glyphicon glyphicon-question-sign"></span> '.$question['text'].' </div>';
-                                        foreach ($answerData[$key] as $k => $answer) {
+                                        foreach ($answerData[$key] as $key => $answer) {
+                                            if(in_array($answer['id'], $votes)){
+                                                $checked = 'checked="checked"';
+                                            }
+                                            else{
+                                                $checked = '';
+                                            }
                                             $qa_content .='<div class="form-group">
                                             <div class="checkbox"> 
                                             <label>';
-                                            $qa_content .= '<input id="'.$answer['id'].'" type="checkbox" name="vote_check" >' . $answer['text'] . '
+                                            $qa_content .= '<input id="'.$answer['id'].'" type="checkbox" name="vote_check" '.$checked.'>' . $answer['text'] . '
                                                 </label>
                                             </div></div>';
                                         }
@@ -121,7 +167,13 @@ foreach ($questionData as $key => $value) {
                                                 <select class="form-control" >';
                                         
                                         foreach ($answerData[$key] as $k => $answer) {
-                                            $qa_content .= '<option value="' . $answer['id'] . '">' . $answer['text'] . "</option>";
+                                            if(in_array($answer['id'], $votes)){
+                                                $selected = ' selected ';
+                                            }
+                                            else{
+                                                $selected = '';
+                                            }
+                                            $qa_content .= '<option value="' . $answer['id'] . '"'.$selected.'>' . $answer['text'] . "</option>";
                                         }
                                         $qa_content .= "</select> </div>";
          

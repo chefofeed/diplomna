@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'class.user.php';
+$token = isset($_GET['token'])? $_GET['token']: 0;
 //error_log('user instance');
 $user_login = new USER();
 
@@ -16,7 +17,12 @@ if(isset($_POST['btn-login']))
 //	error_log('user login');
 	if($user_login->login($email,$upass))
 	{
-		$user_login->redirect('home.php');
+            if(!empty($token)){
+                $user_login->redirect('survey.php?token='.$token);
+            }
+            else{
+                $user_login->redirect('home.php');
+            }
 	}
 }
 ?>

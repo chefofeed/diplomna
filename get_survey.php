@@ -77,7 +77,7 @@ foreach ($questionData as $key => $question) {
                                     <span class="input-group-addon ">';
                      $qa_content.='<input type="radio" aria-label="..." class="type">
                                       </span>
-                                          <input type="text" class="form-control" aria-label="..."class="form-control answer" value="'.$answer['text'].'">
+                                          <input type="text" class="form-control " answer-id="'.$answer['id'].'" aria-label="..."class="form-control answer" value="'.$answer['text'].'">
                                        </div>' ;
             break;
             case 'checkbox':
@@ -85,7 +85,7 @@ foreach ($questionData as $key => $question) {
                                     <span class="input-group-addon">';
                      $qa_content.='<input type="checkbox" aria-label="..." class="type">
                                       </span>
-                                          <input type="text" class="form-control" aria-label="..."class="form-control answer" value="'.$answer['text'].'">
+                                          <input type="text" class="form-control" answer-id="'.$answer['id'].'" aria-label="..."class="form-control answer" value="'.$answer['text'].'">
                                        </div>' ;
             break;
             case 'hidden':
@@ -93,7 +93,7 @@ foreach ($questionData as $key => $question) {
                                     <span class="input-group-addon">';
                      $qa_content.='<input type="hidden" aria-label="..." class="type">
                                       </span>
-                                          <input type="text" class="form-control" aria-label="..."class="form-control answer" value="'.$answer['text'].'">
+                                          <input type="text" class="form-control" answer-id="'.$answer['id'].'" aria-label="..."class="form-control answer" value="'.$answer['text'].'">
                                        </div>' ;
             break;
             }
@@ -118,7 +118,8 @@ foreach ($questionData as $key => $question) {
            </div>
        </div>';
 }
- $qa_content.='<div class="form-group">
+
+$qa_content.= '   <div class="form-group">
                 <button type="button" id="add_question"  class="btn btn-primary">Add Question</button>
             </div>';
 echo $qa_content;
@@ -146,6 +147,8 @@ echo $qa_content;
 </div>
     
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Send Form</button>
+<button type="button" id="submit-survey" class="btn btn-primary">Submit</button>
+<button type="button" id="reload-form" class="btn btn-primary">Reload form</button>
 
 <div class="modal fade bd-example-modal-sm" tabindex="-1" id="modal" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
@@ -179,7 +182,6 @@ echo $qa_content;
       </div>
         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Done</button>
   
 </div>
       

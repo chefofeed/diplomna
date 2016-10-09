@@ -114,4 +114,5 @@ class USER extends Mysql_model {
             echo $ex->getMessage();
         }
     }
+  
 }

@@ -41,5 +41,24 @@ class Answer extends Mysql_model {
             echo $ex->getMessage();
         }
     }
+    
+    public function decrementCount($id) {
+        $count = $this->getById($id)['count'];
+        $count = empty($count) ? 1 : --$count;
+        try {
+            $query = "UPDATE " . $this->table . " SET count = :count "; //.$data. " WHERE id = :id";
+            $query .= 'WHERE id = :id';
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindparam(":id", $id);
+            $stmt->bindparam(":count", $count);
+            $stmt->execute();
+            //$row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return true;
+        } catch (PDOException $ex) {
+            return false;
+            echo $ex->getMessage();
+        }
+    }
 
 }

@@ -43,33 +43,29 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     </head>
     <body class="body-style" >
+        <div>
         <!--<div class="navbar navbar-defaul">-->
         <!--            <div class="navbar-inner">-->
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <a class="brand" href="home.php"> HOME</a>
-                
+
                 <div class="btn-group">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        Poll options
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="#">Create poll</a></li>
-                        <li><a href="#">Delete poll</a></li>
-                    </ul>
+                    <button type="button" class="btn btn-danger create-poll">Create poll</button>
                 </div>
-       
+
+
                 <div class="btn-group">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        Poll results
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="#">Chart results</a></li>
-                        <li><a href="#">table results</a></li>
-                    </ul>
+                    <button type="button" class="btn btn-danger delete-poll">Delete poll</button>
                 </div>
+
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-danger show-results">Poll results</button>
+                </div>
+                <form class="hidden" method="POST" action="results.php" id="result-form"> 
+                    <input name="id" type="hidden">
+                </form>
 
                 <ul class="nav pull-right">
                     <li class="dropdown">
@@ -89,6 +85,7 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
         </nav>
         <div class="row">
             <div class ="col-md-8 col-md-offset-2">
+                <div class="loader hidden"><img class="loader-gif" src="bootstrap/img/ajax-loader.gif"></div>
                 <div class="container" id="page_content">    
                     <div class="row">
                         <?php
@@ -133,4 +130,6 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
         <script src="bootstrap/js/jquery-1.9.1.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="assets/scripts.js"></script>
-
+</div>
+</body>
+</html>

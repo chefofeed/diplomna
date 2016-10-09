@@ -6,7 +6,7 @@ require_once 'class.user.php';
 
 class Mysql_model {
 
-    //@var $con PDO 
+    
     protected $conn;
     protected $table;
     protected $tableStruct;
@@ -61,7 +61,7 @@ class Mysql_model {
         }
     }
 
-    ////////////////////////////////////////////
+
 
     public function getById($id) {
         try {
@@ -104,18 +104,19 @@ class Mysql_model {
         try {
             $query = "UPDATE " . $this->table ." SET "; //.$data. " WHERE id = :id";
             foreach ($data as $key => $val) {
-                $query .= $key.'='.':'.$key;
+                $query .= $key.' ='.' :'.$key.' ,';
             }
+            $query = rtrim($query, ',');
             $query .= 'WHERE id = :id';
             $stmt = $this->conn->prepare($query);
             $stmt->bindparam(":id", $id);
-            foreach ($data as $key => $value) {
-                 $stmt->bindparam(":".$key, $value);
+            foreach ($data as $k => &$value) {
+                 $stmt->bindparam(":".$k, $value);
             }
             $stmt->execute();
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            //$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            return $row;
+            //return $row;
         } catch (PDOException $ex) {
             echo $ex->getMessage();
         }

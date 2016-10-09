@@ -21,7 +21,8 @@ $survey['edit_response']= filter_var($data['edit_response'], FILTER_VALIDATE_BOO
 $survey['shuffle_question']= filter_var($data['shuffle_question'], FILTER_VALIDATE_BOOLEAN)? 1: 0;
 $survey['user_id'] = $user->getUser();
 $survey['create_date'] = gmdate('Y-m-d H:i:s');
-$survey['token']= md5($row['userID'].$row['userName'].$survey['title']);
+$tokeString = !empty($survey['title'])? $survey['title']: uniqid('', true);
+$survey['token']= md5($row['userID'].$row['userName'].$tokeString);
 //error_log(var_export($row,TRUE));
 $surveyModel = new Survey();
 $surveyModel->insert($survey);
@@ -37,13 +38,10 @@ foreach ($data['questions'] as $key => $value) {
     $questionModel->insert($question);
     $questionId = $questionModel->lastInsertId();
     foreach ($data['questions'][$key]['answers'] as $k => $v) {
-        $answer['text'] = $v;
+        $answer['text'] =$v['text'];
         $answer['question_id'] = $questionId;
         $answer['survey_id'] = $surveyId;
         $answerModel->insert($answer);
     }
-
-
-    
     echo json_encode($data);
 }
