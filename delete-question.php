@@ -13,8 +13,8 @@ $questionId = $_POST['question-id'];
 //error_log($questionId);
 $question = new Question();
 $answer = new Answer();
-$deleteanswers = new UserAnswer;
-$delete = $deleteanswers->deleteQuestionAnswers($user->getUser() ,$surveyId,$questionId);
+$useranswerModel = new UserAnswer;
+$delete = $useranswerModel->deleteQuestionAnswers($user->getUser() ,$surveyId,$questionId);
 $row = $answer->deleteAnswers($questionId,$surveyId);
 if($row){
     $row = $question->delete($questionId);
