@@ -5,6 +5,21 @@ require_once 'class.user.php';
 require_once 'survey_model.php';
 require_once 'question_model.php';
 require_once 'answer_model.php';
+require_once __DIR__ . '/php-graph-sdk-5.0.0/src/Facebook/autoload.php';
+//FACEBOOK login
+session_start();
+
+$fb = new Facebook\Facebook([
+  'app_id' => '1753404014911806', // Replace {app-id} with your app id
+  'app_secret' => '3a6ca40d67b29e4191acb4bd32626f72',
+  'default_graph_version' => 'v2.2',
+  ]);
+
+$helper = $fb->getRedirectLoginHelper();
+
+$permissions = ['email', 'publish_actions']; // Optional permissions
+$loginUrl = $helper->getLoginUrl('http://localhost/diplomna/fb-callback.php', $permissions);
+//--------------FACEBOOK login
 
 $user_home = new USER();
 
@@ -18,7 +33,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 $rows = $stmt->fetch(PDO::FETCH_ASSOC);
 
 $id = isset($_POST['id']) ? $_POST['id'] : 0;
-
+$_SESSION['current-survey'] = $id;
 $survey = new Survey();
 $question = new Question();
 $answer = new Answer();
@@ -171,7 +186,7 @@ echo $qa_content;
     			<div class="col-md-12">
                     <ul class="social-network social-circle"> 
                         
-                        <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="<?php echo htmlspecialchars($loginUrl); ?>" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
                         <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
                     </ul>
                             

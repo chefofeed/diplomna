@@ -578,3 +578,4 @@ $('body').on('click','#submit-survey', function () {
         return;
     });
 });
+
