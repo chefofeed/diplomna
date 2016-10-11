@@ -80,11 +80,12 @@ $survey = new Survey();
 $surveyData = $survey->getById($surveyId);
 //"http://" . $_SERVER['SERVER_NAME'] ."/". "diplomna/survey.php?token=". $surveyData['token'],
 ////
-$temp='http://localhost/diplomna/survey.php?token=';
+$temp='http://127.0.0.1/diplomna/survey.php?token=';
 $votetoken=$surveyData['token'];
-///
+///'link' => $temp.$votetoken,////////concatenaciq za adresa
 $linkData = [ 
-  'link' => $temp.$votetoken,////////concatenaciq za adresa
+  //'link' => 'http://127.0.0.1',////////concatenaciq za adresa
+  'link' => $temp.$votetoken,
   'message' => 'You can vote for this poll here:'.$_SESSION['current-survey'],
   ];
 
