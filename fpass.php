@@ -92,7 +92,7 @@ if(isset($_POST['btn-submit']))
         
         <input type="email" class="input-block-level" placeholder="Email address" name="txtemail" required />
      	<hr />
-        <button class="btn btn-danger btn-primary" type="submit" name="btn-submit">Generate new Password</button>
+        <button class="btn btn-danger btn-primary"  id="generate-pass" type="submit" name="btn-submit">Generate new Password</button>
       </form>
 
     </div> <!-- /container -->

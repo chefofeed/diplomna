@@ -48,7 +48,7 @@ foreach ($questionData as $key => $value) {
 
 ?>
 
-<div class="panel panel-info">
+<div class="panel panel-primary">
     <div class="panel-heading">
         Page 1/1
     </div>
@@ -144,7 +144,7 @@ echo $qa_content;
 </div>
 
 
-<div class="panel panel-info send-form">
+<div class="panel panel-primary send-form">
     <div class="panel-heading ">
         Form and page settings
     </div> 

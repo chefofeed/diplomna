@@ -54,17 +54,18 @@ foreach ($questionData as $key => $value) {
         
         <div class="row">
             <div class="col-lg-4 col-md-offset-4" id="forms-vote-title">
-                <h1 class="page-header ">Forms</h1>
+                <h1 class="page-header ">Vote page</h1>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-6 col-md-offset-3">
                 <div class="panel panel-yellow" id="QAsurv">
-                    <div class="panel-heading">
-                        Basic Form Elements
+                    <div class="panel-heading vote-heading">
+                       Select your vote below
+
                     </div>
                     <div class="panel-body fvote">
-                        <div class="alert alert-info" id="ftitle" survey-id="<?php echo $surveyData['id']; ?>"><h5><?php echo $surveyData['title'] ?></h5></div>
+                        <div class="alert" id="ftitle" survey-id="<?php echo $surveyData['id']; ?>"><h5><?php echo $surveyData['title'] ?></h5></div>
                         <div class="well"> <small><?php echo $surveyData['description'] ?></small></div>
 
 

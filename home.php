@@ -42,11 +42,11 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
         <link type="text/css" href="assets/styles.css" rel="stylesheet" media="screen">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     </head>
-    <body class="body-style" >
-        <div>
+    <body id="body-style" >
+       <div class="container">
         <!--<div class="navbar navbar-defaul">-->
         <!--            <div class="navbar-inner">-->
-        <nav class="navbar navbar-default navbar-fixed-top">
+        <nav class="navbar navbar-dark bg-primary navbar-fixed-top">
             <div class="container-fluid">
                 <a class="brand" href="home.php"> HOME</a>
 
@@ -84,7 +84,7 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
 
         </nav>
         <div class="row">
-            <div class ="col-md-8 col-md-offset-2">
+            <div class ="col-md-8 ">
                 <div class="loader hidden"><img class="loader-gif" src="bootstrap/img/ajax-loader.gif"></div>
                 <div class="container" id="page_content">    
                     <div class="row">
@@ -98,7 +98,7 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
                             }
                             $panel = '<div class="col-md-3">
                                 <div class="panel ';
-                            $panel .= $value['title'] == 'BLANK' ? 'panel-primary blank' : 'panel-success survey';
+                            $panel .= $value['title'] == 'BLANK' ? 'panel-success blank' : 'panel-primary survey';
                             $panel .= '" id="' . $value['id'] . '">
                                 <div class="panel-heading">' .
                                     $value['title']

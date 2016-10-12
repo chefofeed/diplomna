@@ -13,7 +13,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 $rows = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 
-<div class="panel panel-danger">
+<div class="panel panel-primary">
     <div class="panel-heading">
         Page 1/1
     </div>
@@ -58,7 +58,7 @@ $rows = $stmt->fetch(PDO::FETCH_ASSOC);
                 <button type="button" id="add_question"  class="btn btn-primary">Add Question</button>
             </div>
 
-            <div class="panel panel-info send-form">
+            <div class="panel panel-primary send-form">
                 <div class="panel-heading ">
                     Form and page settings
                 </div>

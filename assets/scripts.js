@@ -28,7 +28,7 @@ $('body').on('change', '#Selector', function () {
     switch ($(this).val()) {
         case '2':
             html = '<div class="row"><div class="col-lg-6">' +
-                    '<input type="text" class="form-control answer" aria-label="..." value=" your text here!" disabled="disabled">' +
+                    '<input type="text" class="form-control answer" aria-label="..." value=" You will place your text here!" disabled="disabled">' +
                     '</div></div></div>';
 
             break;
@@ -89,7 +89,7 @@ $('body').on('change', '#Selector', function () {
                     '</div></div></div>';
             break;
         case '6':
-            html = '<div class="row"><div class="col-lg-6"><div class="textarea answer">your text</div></div></div>';
+            html = '<div class="row"><div class="col-lg-6"><div class="textarea answer">You will place your text here!</div></div></div>';
             break;
     }
     $('#content').html(html);
@@ -515,6 +515,7 @@ $('body').on('click', '.create-poll', function () {
         $('#page_content').html(resp);
 });
 });
+
 
 $('body').on('click','#send-form', function () {
     var data = {};

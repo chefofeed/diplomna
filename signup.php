@@ -90,7 +90,8 @@ if(isset($_POST['btn-signup']))
         <input type="password" class="input-block-level" placeholder="Password" name="txtpass" required />
      	<hr />
         <button class="btn btn-large btn-primary" type="submit" name="btn-signup">Sign Up</button>
-        <a href="index.php" style="float:right;" class="btn btn-large">Sign In</a>
+     <a href="index.php" style="float:right;" class="btn btn-btn-primary">Sign In</a>
+
       </form>
 
     </div> <!-- /container -->

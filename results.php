@@ -69,20 +69,20 @@ foreach ($questionData as $key => $value) {
         </script>
 
     </head>
-    <body  class="base-body" >
+    <body  class="base-body2" >
             <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <h1 class="page-header">Results</h1>
+                <div class="col-md-8 col-md-offset-2" id="result-header">
+                    <h1 class="page-header">Results from the votes</h1>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                    <div class="panel panel-green" >
-                        <div class="panel-heading">
-                            Results
+                    <div class="panel panel-primary" >
+                        <div class="panel-heading resulthead">
+                            Results in chart and table view
                         </div>
 
-                        <div class="panel-body ">
+                        <div class="panel-body">
 
                             
 
@@ -128,7 +128,7 @@ foreach ($questionData as $key => $value) {
                                         echo $html;
                                     }
                                     else{
-                                        $html = '<div class="panel panel-default">
+                                        $html = '<div class="panel panel-primary" id="table-format">
                                         <div class="panel-heading">'.$value['text'].'</div>
                                         <div class="panel-body">';
                                          foreach ($answerData[$value['id']] as $key => $ans) {
