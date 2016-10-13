@@ -89,8 +89,8 @@ if(isset($_POST['btn-signup']))
         <input type="email" class="input-block-level" placeholder="Email address" name="txtemail" required />
         <input type="password" class="input-block-level" placeholder="Password" name="txtpass" required />
      	<hr />
-        <button class="btn btn-large btn-primary" type="submit" name="btn-signup">Sign Up</button>
-     <a href="index.php" style="float:right;" class="btn btn-btn-primary">Sign In</a>
+        <button class="btn btn-sm btn-primary" type="submit" name="btn-signup">Sign Up</button>
+     <a href="index.php" style="float:right;" class="btn btn-primary btn-sm active" role="button">Sign In</a>
 
       </form>
 

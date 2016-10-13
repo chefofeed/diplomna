@@ -325,6 +325,9 @@ a.brand {
     text-decoration: none;
     margin-right: 15px;
 }
+a.lostpass{
+    margin-left: 35px;
+}
 
 a.brand:hover {
     color: #000000; 
